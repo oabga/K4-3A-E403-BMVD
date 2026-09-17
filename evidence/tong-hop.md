@@ -1,43 +1,24 @@
-# Tổng hợp khảo sát — điền sáng 17/9
+# Tổng hợp — điền sau mining + form
 
-- Link form:
-- Ngày đóng form:
-- `n` (câu 1 ≠ Không):
+## Mining (`evidence/mining.md`)
 
-## % xác nhận
+- `n_log`:
+- % `NEED_EXTERNAL`:
+- % `IN_CORPUS`:
 
-| Ứng viên | Câu | Đúng / n | % |
-|---|---|---|---|
-| A. Ôn bằng câu hỏi từ đúng slide | 7 | / | |
-| B. Tối ưu chỗ hỏi đáp | 9 | / | |
-| C. Tìm slide lúc làm bài | 11 | / | |
+## Form
 
-## Việc A — tần suất / chi phí / tool sẵn có
-
-- Câu 5 (hầu hết buổi / 1–2 tuần / hiếm):
-- Câu 6 (<10' / 10–30' / >30' hoặc bỏ):
-- Câu 3 (cách ôn hiện tại):
-- Câu 4 (VLearn đã có luyện từ bài? đúng bài / lệch / không thấy):
-
-## Việc B — chỗ hỏi đáp đã ổn?
-
-- Câu 8 “đủ dùng”:
-- Câu 8 “lệch / ngoài bài” hoặc “không dùng”:
-
-→ Nhiều “đủ dùng” = **loại B**, ghi: VLearn đã bám slide khi chat.
-
-## Việc đau nhất (câu 12)
-
-| Việc | Số |
-|---|---|
-| Thiếu / lệch câu hỏi ôn | |
-| Hỏi đáp trên trang bài | |
-| Tìm slide lúc làm bài | |
-| Không cái nào | |
+- Link:
+- `n` (HV có dùng VLearn/LMS):
+- Câu 7 Đúng / n = %  (job Extend)
+- Câu 4 tần suất (hầu hết buổi / 1–2 tuần / hiếm):
+- Câu 5 thời gian tìm ngoài:
+- Câu 6 chỗ hỏi hiện tại (không trả lời / chung / không nguồn / có nguồn):
+- Câu 10 việc đau nhất:
 
 ## Quyết định
 
-- Ứng viên CHỌN:
-- Ứng viên LOẠI + lý do bằng số:
-- Loại spec: [ ] tối ưu sẵn có  [ ] tính năng mới
-  (câu 4: không thấy / lệch → mới hoặc tối ưu quiz; đã đúng bài thì không chọn A)
+- CHỌN: VLearn Extend (nguồn ngoài khi corpus không đủ + nói rõ khi không fetch được)
+- LOẠI 1: chỉ trả lời trong slide — VLearn đã có; % câu 8 / mining `IN_CORPUS` không phải pain chính
+- LOẠI 2: làm hộ bài từ web — câu 9/10, ngoài phạm vi, cost-of-error cao
+- Loại spec: [x] tính năng mới (extend chỗ hỏi đáp) · không thay chế độ bám-slide khi `IN_CORPUS`

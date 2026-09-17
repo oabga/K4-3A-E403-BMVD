@@ -1,8 +1,8 @@
-# Quote nguyên văn — học viên — điền sau form
+# Quote nguyên văn — NEED_EXTERNAL / tự tìm ngoài
 
-Copy đúng lời câu 13. Che tên nếu cần.
+Mining: câu hỏi log. Form: câu 11. Copy đúng lời. Che tên nếu cần.
 
-| # | Vai trò | Nguồn (form #, ngày) | Quote nguyên văn |
+| # | Vai trò | Nguồn (log file / form #, ngày) | Quote nguyên văn |
 |---|---|---|---|
 | 1 | HV | | |
 | 2 | HV | | |

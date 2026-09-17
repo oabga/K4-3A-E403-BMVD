@@ -1,6 +1,6 @@
-# Form khảo sát — học viên — ôn bài từ slide VLearn
+# Form khảo sát — HV cần nguồn ngoài khi slide mỏng
 
-~3 phút. User = học viên. Copy sang Google Form.
+Bổ sung mining `data/` (chuẩn A). Form này lấy `%` xác nhận + quote. ~3 phút.
 
 - Link form:
 - Ngày gửi:
@@ -8,122 +8,82 @@
 
 ---
 
-## Mô tả form
+## Mô tả
 
-Khảo sát lúc bạn ôn sau buổi học trên VLearn/LMS, lúc hỏi trên trang bài, và lúc tìm slide để làm bài tập. Trả lời theo việc **đang làm thật**. Không có đáp án đúng.
-
----
-
-## Câu hỏi
-
-**Câu 1.** Trong 30 ngày qua bạn có học trên VLearn (hoặc LMS của khoá) không? *bắt buộc*
-- Có, thường xuyên
-- Có, thỉnh thoảng
-- Không → tổng hợp **loại khỏi n**
-
-**Câu 2.** (Tùy chọn) Môn / khoá gần nhất: ________
+Khi học trên VLearn/LMS, lúc slide đủ làm quiz nhưng bạn muốn hiểu rộng/sâu hơn, hoặc tài liệu lớp chưa đủ. Trả lời theo việc **đang làm thật**.
 
 ---
 
-### Việc A — Ôn sau buổi học (ứng viên ưu tiên)
+**Câu 1.** 30 ngày qua bạn có học trên VLearn (hoặc LMS khoá) không?  
+- Có, thường xuyên  
+- Có, thỉnh thoảng  
+- Không → loại khỏi `n`
 
-**Câu 3.** Sau khi học xong một bài trên VLearn, bạn **thường** ôn thế nào? (chọn 1)
-- Có quiz / bài tập GV giao, **bám đúng** bài vừa học
-- Có quiz / bài tập nhưng generic, lệch bài, hoặc ra trễ
-- Tự đặt câu hỏi từ slide
-- Đọc lại slide, không luyện câu hỏi
-- Hỏi công cụ bên ngoài
-- Không ôn
+**Câu 2.** (Tùy chọn) Môn / khoá: ________
 
-**Câu 4.** Trên trang bài VLearn, bạn thấy chỗ **tự tạo / luyện câu hỏi từ đúng bài đang học** không?
-- Có, đã dùng và câu hỏi đúng bài
-- Có, dùng nhưng câu hỏi lệch / quá chung
-- Có, thấy nhưng không dùng
-- Không thấy chức năng này
-- Không chắc
+**Câu 3.** Khi slide/bài giảng **chưa đủ** (thiếu định nghĩa, ví dụ, hoặc chỉ phủ một phần) mà bạn vẫn muốn hiểu nội dung trên slide, bạn **thường** làm gì? (chọn 1)  
+- Chỉ đọc lại slide, chấp nhận không hiểu sâu  
+- Hỏi chỗ hỏi đáp **trên trang bài**  
+- Tự tìm Google / Scholar / YouTube  
+- Hỏi bạn / giảng viên  
+- Hiếm khi gặp tình huống này
 
-**Câu 5.** Việc cần ôn sau buổi học xảy ra:
-- Hầu hết buổi
-- Khoảng 1–2 buổi / tuần
-- Hiếm
-- Không ôn
+**Câu 4.** Việc phải **tự ra ngoài** tìm (Google, Scholar, …) vì tài liệu lớp mỏng xảy ra:  
+- Hầu hết buổi  
+- 1–2 lần / tuần  
+- Hiếm  
+- Không gặp
 
-**Câu 6.** Lần gần nhất muốn ôn, bạn mất khoảng bao lâu mới có cái để luyện (hoặc bỏ)?
-- Dưới 10 phút (đã có đề sẵn, dùng được)
-- 10–30 phút (tự soạn / tìm đề)
-- Trên 30 phút / bỏ không ôn
+**Câu 5.** Lần gần nhất tự tìm nguồn ngoài, mất khoảng:  
+- Dưới 10 phút, tìm được nguồn ổn  
+- 10–30 phút  
+- Trên 30 phút / bỏ cuộc / không biết nguồn nào đáng tin  
 - Không nhớ / không gặp
 
-**Câu 7.** “Khi vừa học xong một buổi, tôi muốn có câu hỏi ôn đúng tài liệu vừa học, để biết chỗ nào chưa hiểu.”
-- Đúng với tôi
-- Một phần
+**Câu 6.** Lần dùng chỗ hỏi trên trang bài cho câu **rộng/sâu hơn slide**:  
+- Không trả lời / bảo chỉ có trong bài — tôi phải tự tìm tiếp  
+- Trả lời chung, không nguồn, khó tin  
+- Trả lời sâu nhưng không biết lấy từ đâu, sợ lệch bài  
+- Chỉ ra nguồn ngoài rõ ràng, đối chiếu được với slide  
+- Chưa hỏi kiểu này / không có chỗ hỏi
+
+**Câu 7.** “Khi tài liệu buổi học chưa đủ để hiểu sâu nội dung trên slide, tôi muốn được chỉ nguồn bổ sung đáng tin (và biết cái gì là trong bài, cái gì là ngoài bài), để không mất thời gian tự kiếm và dễ lệch.”  
+- Đúng với tôi  
+- Một phần  
+- Không đúng  
+- Không gặp việc này
+
+---
+
+### Hai ứng viên để so impact
+
+**Câu 8.** “Tôi chủ yếu cần chỗ hỏi **chỉ** trả lời đúng slide, không cần nguồn ngoài.”  
+- Đúng với tôi  
+- Một phần  
 - Không đúng
-- Không gặp việc này
 
----
+**Câu 9.** “Khi làm bài nộp, tôi muốn hệ thống tự tìm hộ toàn bộ tài liệu trên mạng rồi viết giúp bài.”  
+- Đúng với tôi  
+- Một phần  
+- Không đúng  
+  *(Ứng viên này để loại: ngoài phạm vi, cost-of-error cao.)*
 
-### Việc B — Hỏi đáp trên trang bài (dự kiến loại)
-
-**Câu 8.** Khi kẹt một khái niệm, chỗ hỏi trên trang bài VLearn (nếu có) lần gần nhất:
-- Chỉ trả lời theo slide / bài đang học, đủ dùng
-- Trả lời theo bài nhưng khó dùng (không chỉ slide nào, dài, chậm…)
-- Trả lời lệch / ngoài bài
-- Không dùng / không thấy chỗ hỏi
-- Hiếm khi bị kẹt
-
-**Câu 9.** “Tôi vẫn thường kẹt vì chỗ hỏi trên VLearn không bám bài / không đủ tin.”
-- Đúng với tôi
-- Một phần
-- Không đúng — chỗ hỏi đã ổn hoặc tôi không cần
-- Không gặp việc này
-
----
-
-### Việc C — Tìm slide lúc làm bài tập
-
-**Câu 10.** Khi làm bài nộp / bài tập, bạn mất thời gian tìm “ý này ở slide / bài nào”?
-- Thường xuyên
-- Thỉnh thoảng
-- Hiếm
-- Không
-
-**Câu 11.** “Trước khi nộp, tôi muốn tìm đúng đoạn trong bài đã học liên quan đề bài.”
-- Đúng với tôi
-- Một phần
-- Không đúng
-- Không gặp việc này
-
----
-
-**Câu 12.** Việc nào **tốn thời gian / khó học nhất**? (chọn 1)
-- Sau buổi học không có (hoặc lệch) câu hỏi ôn đúng bài
-- Kẹt khái niệm khi xem bài, chỗ hỏi trên VLearn không giúp được
-- Làm bài tập mà không tìm ra slide / bài liên quan
+**Câu 10.** Việc nào **tốn thời gian / gây lệch bài nhất**? (chọn 1)  
+- Slide mỏng, phải tự tìm nguồn ngoài, không biết đâu đáng tin  
+- Chỗ hỏi trên trang bài không bám slide (lệch bài)  
+- Muốn hệ thống làm hộ bài từ nguồn trên mạng  
 - Không cái nào đáng kể
 
-**Câu 13.** *Bắt buộc, đoạn văn*
-Kể lần gần nhất bạn cần ôn sau buổi học (có đề không, làm gì, mất bao lâu). Nếu không ôn: kể lần kẹt khi xem bài hoặc lúc tìm slide để làm bài. 3–6 câu. Không cần đề xuất tính năng.
+**Câu 11.** *Bắt buộc, đoạn văn*  
+Kể lần gần nhất slide/bài không đủ, bạn phải hiểu thêm. Bạn hỏi trên lớp / Google / chỗ nào, mất bao lâu, tìm được gì, có lệch bài không. 3–6 câu.
 
 ---
 
-## Cách tính số
+## Tính số
 
-`n` = câu 1 ≠ Không.
+`n` = câu 1 ≠ Không.  
+Ứng viên CHỌN (VLearn Extend): câu 7 = Đúng.  
+Loại “chỉ bám slide”: câu 8 + canvas (VLearn đã làm).  
+Loại “làm hộ bài từ web”: câu 9 / câu 10.
 
-| Ứng viên | % xác nhận | Ghi chú |
-|---|---|---|
-| A. Ôn bằng câu hỏi từ đúng slide | câu 7 = Đúng | Ưu tiên nếu câu 12 nhiều người chọn ôn |
-| B. Tối ưu chỗ hỏi đáp | câu 9 = Đúng | Loại nếu câu 8 đa số “đủ dùng” |
-| C. Tìm slide lúc làm bài | câu 11 = Đúng | Dự phòng |
-
-Quote ≥5: câu 13.
-
----
-
-## Tin nhắn Zalo lớp
-
-```
-Mn giúp mình 3 phút khảo sát lúc ôn bài trên VLearn/LMS (sau buổi học, chỗ hỏi trên trang bài, tìm slide lúc làm bài). Đồ án nhóm, không có đáp án đúng.
-[DÁN LINK FORM]
-Cảm ơn mn.
-```
+Quote ≥5: câu 11 → `quotes.md`.

@@ -1,0 +1,24 @@
+{
+  "pack": "excerpt-stand-in",
+  "note": "Mã tham chiếu ngắn. Không phải data pack lớp. data/ gitignore.",
+  "excerpts": [
+    {
+      "id": "B3-S1",
+      "lesson": "Buoi 3",
+      "title": "Bien la gi?",
+      "text": "Bien: ten gan voi mot vung nho, chua gia tri co the doi. Khai bao: kieu + ten. Vi du trong slide: int tuoi = 18;"
+    },
+    {
+      "id": "B3-S2",
+      "lesson": "Buoi 3",
+      "title": "Kieu du lieu",
+      "text": "So nguyen, so thuc, ky tu, logic. Slide khong so sanh voi hang, khong co vi du doi thuc."
+    },
+    {
+      "id": "B3-S3",
+      "lesson": "Buoi 3",
+      "title": "Quiz buoi 3",
+      "text": "Cau 1: Bien dung de lam gi? Cau 2: int luu kieu gi? Du de lam quiz — chua du de hieu sau / rong."
+    }
+  ]
+}

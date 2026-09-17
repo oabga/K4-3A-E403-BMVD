@@ -1,38 +1,65 @@
-# Đề tài đề xuất — Hướng A · VLearn · học viên tự ôn từ slide bài
+# Đề tài đã chốt — CP1 canvas · VLearn Extend
 
-Hỏi đáp trên trang bài **đã bám slide, không trả lời ngoài bài** → lát cắt “cấm kiến thức ngoài khi chat” **trùng việc đã có, loại**.
+Nguồn: `canvas/canvas.jpg` (Mini Hackathon AI · Checkpoint 1 · Canvas K3).
 
-Đổi job: sau buổi học, học viên cần **câu hỏi ôn đúng slide vừa học** — khác chat (chat giải thích khi kẹt; ôn là tự kiểm tra hiểu).
+VLearn **đã** trả lời theo slide và không lấy kiến thức ngoài. Đó đúng là **nỗi đau trên canvas**: slide đủ làm quiz nhưng mỏng — thiếu định nghĩa, ví dụ, hoặc corpus chỉ phủ một phần. Học viên muốn hiểu **rộng / sâu hơn nội dung slide** thì phải ra Google/Scholar; AI trong lớp không được lấy nguồn ngoài thật → trả lời chung, không citation.
 
-## Lát cắt mới (ưu tiên)
+**Không làm đề “cấm kiến thức ngoài”.** Đề này là **mở nguồn ngoài có điều kiện**.
 
-**Tên:** Tự luyện câu hỏi ôn từ đúng slide bài vừa học
+## Lát cắt một câu
 
-**Loại (tạm):** tính năng mới — đổi “tối ưu” nếu trang bài đã có tạo quiz/luyện tập từ slide nhưng câu generic / lệch / không chỉ về slide.
-
-**Một câu:** Học viên vừa học xong một bài trên VLearn, cần biết mình hiểu chỗ nào; hệ thống **chỉ được soạn câu hỏi từ slide/tài liệu bài đó**; mỗi câu gắn vị trí slide; không đủ nội dung trên slide thì **không bịa câu**.
+Học viên đang học theo slide/giáo trình/transcript trên VLearn, hỏi để hiểu thêm (rộng, sâu, hoặc ngoài slide); hệ thống **kiểm tra corpus trước**, rồi chọn đúng một nhãn: trả lời trong bài / cần nguồn ngoài / không lấy được — kèm citation hoặc brief tìm, **không bịa link/DOI**.
 
 | Thành phần | Giá trị |
 |---|---|
-| 1 user | Học viên |
-| 1 việc | Sau buổi học, tự ôn đúng bài vừa học |
-| 1 quyết định AI | Câu nào được ra, có nằm trong slide không; không chắc thì bỏ câu đó |
-| 1 kết quả | Bộ câu ôn ngắn + đáp án/gợi ý trỏ về slide, không dùng kiến thức ngoài |
+| 1 user | Học viên (sinh viên đang học theo slide lớp) |
+| 1 việc | Hiểu thêm kiến thức trình bày trên slide khi tài liệu lớp chưa đủ |
+| 1 quyết định AI | `IN_CORPUS` · `NEED_EXTERNAL` · `CANNOT_FETCH` |
+| 1 kết quả | Trả lời + nguồn trong corpus, **hoặc** brief tìm 3 từ khóa + loại nguồn + tiêu chí tin cậy, **hoặc** checklist tự tìm khi AI không fetch được |
 
-**JTBD:** Khi vừa học xong một buổi, tôi muốn có câu hỏi ôn đúng tài liệu vừa học, để biết chỗ nào chưa hiểu chứ không phải đoán đề hoặc ôn lệch bài.
+**Hướng spec:** A — VLearn (gắn trang bài VLearn). Canvas gọi “Hướng B · VLearn Extend” = tên bài CP1, không phải ô “Trợ lý Học viên”.  
+**Loại:** tính năng mới trên chỗ hỏi đáp đã có (extend), không thay chatbot bám-slide.
 
-**Problem:** Sau buổi học thường không có đề ôn bám slide, hoặc đề generic; học viên đọc lại slide, hỏi nguồn ngoài, hoặc không luyện — không biết mình đã hiểu bài đó chưa.
+## Ba nhãn — bắt buộc hiện cho học viên
 
-**Quy tắc căn cứ:** câu hỏi, đáp án, giải thích **chỉ lấy từ slide/tài liệu bài đang ôn**. Không ra câu “kiến thức liên quan” nếu slide không có. Chat hỏi đáp sẵn có **không đụng**.
+1. **`IN_CORPUS`** — câu hỏi đã có trong slide/transcript: trả lời ngắn, citation trong corpus (slide/mục nào). Không nhét nguồn ngoài.
+2. **`NEED_EXTERNAL`** — corpus không đủ (thiếu định nghĩa, ví dụ, phần chưa phủ): **không giả vờ là trong bài**. Trả brief tìm: 3 từ khóa, loại nguồn (textbook, docs, paper), tiêu chí tin cậy. Nếu prototype **được phép fetch web**: tổng hợp câu trả lời **kèm nguồn**, ghi rõ đây là ngoài lớp.
+3. **`CANNOT_FETCH`** — AI không lấy được web / vượt hạn / nguồn không tin: nói thẳng, đưa checklist để sinh viên tự tìm. Không bịa paper, URL, DOI.
 
-**Không làm:** chatbot mới; hỏi đáp (đã có); làm hộ assignment; đề thi cả môn; kiến thức ngoài slide.
+**Automation:** conditional — chỉ gợi ý/lấy nguồn ngoài **sau khi** đã kiểm tra corpus. Không fetch khi quá hạn. Không bịa citation.
 
-## Hai ứng viên để loại (vẫn hỏi form)
+## JTBD / problem (không chữ AI, không tên sản phẩm)
 
-1. ~~Tối ưu chat: không trả lời ngoài slide~~ — **dự kiến loại:** VLearn đã làm. Form hỏi ngắn để có số “không còn đau”.
-2. (ưu tiên) Tự ôn bằng câu hỏi từ đúng slide bài vừa học
-3. Lúc làm assignment, tìm đoạn slide liên quan đề bài
+**JTBD:** Khi đang học theo tài liệu buổi học mà phần định nghĩa, ví dụ hoặc phạm vi chưa đủ để hiểu sâu, tôi muốn có nguồn bổ sung đáng tin kèm chỗ đối chiếu với bài, để hiểu thêm đúng trọng tâm chứ không mất thời gian tự kiếm và dễ lệch.
 
-## Việc tối nay
+**Problem:** Tài liệu lớp đủ để làm quiz nhưng mỏng; học viên phải tự ra ngoài tìm. Nguồn lẫn, mất thời gian, không biết đâu đáng tin, dễ hiểu lệch bài.
 
-Gửi form `khao-sat.md` cho lớp (≥15–20 HV). Mai: nếu % việc 2 thấp, xét việc 3; việc 1 (chat) chỉ để ghi vào bảng “đã loại”.
+## Evidence — canvas bắt **chuẩn A (mining)** trước
+
+Thư mục `data/` (slide, log hỏi–đáp **được phép**):
+
+- Đếm câu hỏi mà corpus **không phủ** (học viên phải ra ngoài).
+- Không copy paper/docs hay snippet lấy từ ngoài vào `data/`.
+- Không bịa URL/DOI làm evidence.
+- Quote ≥5: lấy từ log hỏi–đáp thật hoặc khảo sát bổ sung (`khao-sat.md`).
+
+## Non-goals
+
+- Không trả lời kiến thức ngoài **như thể** nằm trong slide (trộn corpus + web im lặng).
+- Không bỏ qua bước kiểm tra corpus.
+- Không bịa citation / DOI / paper.
+- Không làm hộ bài nộp, không chatbot độc lập ngoài trang bài.
+- Không fetch vô hạn mọi trang web.
+
+## Đối thủ (gợi ý §3)
+
+- ChatGPT / Gemini: trả lời sâu nhưng không biết slide lớp, dễ lệch, citation giả.
+- Perplexity / Scholar: có nguồn ngoài nhưng không gắn corpus buổi học, không nhãn IN/NEED/CANNOT.
+- Chat VLearn hiện tại: bám slide — **đáng học** khi đủ corpus; **đáng né** khi giả vờ đủ lúc slide mỏng.
+
+## Việc làm ngay
+
+1. Mining `data/` → số câu `IN_CORPUS` vs `NEED_EXTERNAL` (`evidence/mining.md`).
+2. Gửi form `khao-sat.md` cho HV (quote + % xác nhận job này).
+3. Mời ≥5 sinh viên ngoài nhóm làm willing users (canvas §04).
+4. Điền spec trước 21:00 17/9.
