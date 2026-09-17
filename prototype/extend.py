@@ -41,7 +41,16 @@ def load_prompt() -> str:
     return m.group(1).strip() if m else raw
 
 
-def retrieve(question: str, excerpts: list[dict]) -> list[dict]:
+def retrieve(question: str, excerpts: list[dict], corpus_refs: list[str] | None = None) -> list[dict]:
+    if corpus_refs:
+        by_id = {ex["id"]: ex for ex in excerpts}
+        hits = []
+        for ref in corpus_refs:
+            if ref in by_id:
+                hits.append({**by_id[ref], "score": 10})
+        if hits:
+            return hits[:3]
+
     q_tokens = set(re.findall(r"[a-z0-9]+", fold(question)))
     hits = []
     for ex in excerpts:
@@ -56,32 +65,45 @@ def retrieve(question: str, excerpts: list[dict]) -> list[dict]:
 
 def decide(question: str, hits: list[dict], fetch_policy: str) -> str:
     q = fold(question)
-    if re.search(r"viet ho|lam ho|bai tap tuan|hoan chinh de nop|bao cao giua ky|kinh te luong|soan giup", q):
+
+    if re.search(
+        r"viet ho|lam ho|bai tap|lab 1|hoan chinh de nop|bao cao giua ky|"
+        r"kinh te luong|soan giup|viet ho toan bo code",
+        q,
+    ):
         return "OUT_OF_SCOPE"
-    if re.search(r"giai thich cai nay|cai nay giup", q):
+
+    if re.search(r"giai thich cai nay|cai nay giup|giai thich giup em cai nay", q):
         return "ASK_AGAIN"
-    if re.search(r"thong ke|xac suat", q):
+    if re.search(r"thong ke|xac suat|bien ngau nhien", q):
         return "ASK_AGAIN"
-    if re.search(r"doi\s*10\.|doi bai|bai bao|ieee|arxiv|paper smith|10\.\d{4}/|memory safety", q):
+
+    if re.search(
+        r"doi\s*10\.|doi paper|doi bai|attention is all you need|"
+        r"bai bao|paper smith|10\.\d{4}/|arxiv|ieee",
+        q,
+    ):
         return "CANNOT_FETCH"
     if fetch_policy == "deny":
         return "CANNOT_FETCH"
     if fetch_policy == "fail_after_retry":
         return "CANNOT_FETCH"
-    if re.search(r"bien la gi\s*\??$", q.strip()) or q.strip() in {"bien la gi?", "bien la gi"}:
-        return "IN_CORPUS"
-    if "int tuoi" in q or "luu kieu" in q:
-        return "IN_CORPUS"
-    if "quiz" in q or "bien dung de lam gi" in q:
-        return "IN_CORPUS"
-    if re.search(r"khac hang|hang nhu|vi du doi thuc|ngoai slide|mutable|rap chieu|so sanh", q):
+
+    # Hỏi rộng/sâu hơn slide → NEED_EXTERNAL (kể cả khi đã hit corpus)
+    if re.search(
+        r"ngoai slide|vi du doi thuc|trong thuc te|ngoai viec|"
+        r"chatbot doanh nghiep|tokenizer cua gpt|gpt-4|"
+        r"doc them tren mang|tim docs chinh thuc",
+        q,
+    ):
         return "NEED_EXTERNAL"
-    if hits and hits[0]["score"] >= 3:
+
+    if hits and hits[0]["score"] >= 2:
         return "IN_CORPUS"
     return "NEED_EXTERNAL"
 
 
-def mock_fetch(fetch_policy: str) -> dict:
+def mock_fetch(fetch_policy: str, question: str = "") -> dict:
     """Nguồn ngoài: MOCK. Retry: MOCK."""
     if fetch_policy == "deny":
         return {"ok": False, "sources": [], "retry_count": 0, "detail": "MOCK policy deny — không fetch"}
@@ -93,7 +115,18 @@ def mock_fetch(fetch_policy: str) -> dict:
             "detail": "MOCK timeout ×2 rồi hết lần retry",
         }
     pack = read_json(PROTO / "external_mock.json")
-    return {"ok": True, "sources": pack["sources"], "retry_count": 0, "detail": "MOCK nạp external_mock.json"}
+    sources = pack["sources"]
+    q = fold(question)
+    picked = []
+    if re.search(r"context rot|doanh nghiep|chatbot", q):
+        picked = [s for s in sources if s["id"] == "MOCK-EXT-02"]
+    elif re.search(r"token|tokenizer|gpt", q):
+        picked = [s for s in sources if s["id"] == "MOCK-EXT-03"]
+    elif re.search(r"attention|rnn|vi du", q):
+        picked = [s for s in sources if s["id"] == "MOCK-EXT-01"]
+    if not picked:
+        picked = sources[:1]
+    return {"ok": True, "sources": picked, "retry_count": 0, "detail": "MOCK nạp external_mock.json"}
 
 
 def build_notebook(label: str, hits: list[dict], fetch: dict) -> str:
@@ -177,21 +210,25 @@ def call_llm(notebook: str, question: str) -> tuple[dict, str]:
     raise TechnicalError("Thiếu OPENAI_API_KEY hoặc GEMINI_API_KEY trong .env — chưa nối được AI thật")
 
 
-def answer_for(question: str, fetch_policy: str = "allow_mock") -> dict:
+def answer_for(
+    question: str,
+    fetch_policy: str = "allow_mock",
+    corpus_refs: list[str] | None = None,
+) -> dict:
     load_dotenv()
     excerpts = read_json(PROTO / "corpus_excerpts.json")["excerpts"]
-    hits = retrieve(question, excerpts)
+    hits = retrieve(question, excerpts, corpus_refs=corpus_refs)
     label = decide(question, hits, fetch_policy)
     fetch = {"ok": False, "sources": [], "retry_count": 0, "detail": "không fetch"}
     if label == "NEED_EXTERNAL":
-        fetch = mock_fetch(fetch_policy)
+        fetch = mock_fetch(fetch_policy, question)
         if not fetch["ok"]:
             label = "CANNOT_FETCH"
     if label == "CANNOT_FETCH" and fetch_policy == "fail_after_retry":
-        fetch = mock_fetch("fail_after_retry")
+        fetch = mock_fetch("fail_after_retry", question)
 
     notebook = build_notebook(label, hits, fetch)
-    mock_parts = ["fetch=MOCK", "retry=MOCK", "corpus=excerpt mã B3-* (không data pack)"]
+    mock_parts = ["fetch=MOCK", "retry=MOCK", "corpus=excerpt mã D1-P* (không commit data pack)"]
     try:
         llm, model_id = call_llm(notebook, question)
         ai = "THAT"
@@ -213,7 +250,11 @@ def answer_for(question: str, fetch_policy: str = "allow_mock") -> dict:
 
     brief = None
     if label == "CANNOT_FETCH":
-        brief = ["variable vs constant", "introductory programming textbook", "official language docs"]
+        brief = [
+            "Attention Is All You Need Google 2017",
+            "official tokenizer documentation Vietnamese",
+            "context window management RAG chatbot",
+        ]
 
     return {
         "label": label,

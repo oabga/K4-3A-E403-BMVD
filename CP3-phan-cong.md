@@ -18,13 +18,13 @@
 | Pack BTC         | Có local      | `data/vlearn-pack/` — slides Day1/Day2, transcript, chatlog      |
 | `data/` trên git | Không commit  | `.gitignore` có `data/` — đúng luật pack                         |
 | Khung CP3        | Có sẵn        | `eval/`, `prototype/`                                            |
-| Golden set       | **Xong**      | 15 case đã neo Day 1 (`D1-P01`–`D1-P10`) trong `eval/golden-set.*` |
-| Corpus prototype | **Xong**      | Đã nạp 10 đoạn trích Day 1 vào `prototype/corpus_excerpts.json`  |
-| Run-01           | **Xong**      | Đã chạy AI thật: 14/15 = 93.3%, sai nguồn 1, lỗi kỹ thuật 0 |
-| Spec CP4         | Template      | Không khóa % ở CP3                                               |
+| Golden set       | **Xong (B)**  | 15 case Day 1 trong `eval/golden-set.*` |
+| Corpus prototype | **Xong (A)**  | `D1-P01`–`D1-P10` trong `prototype/corpus_excerpts.json` |
+| Run-01           | **Có số (B)** | 14/15 = 93.3%; GS-07 sai nguồn — C đã sửa pipeline |
+| Demo Streamlit   | **Xong (C)**  | `prototype/streamlit_app.py` — xem `eval/CP3-review-ABC.md` |
+| Spec CP4         | Template      | Không khóa % ở CP3 |
 
-
-**Kết luận:** Khung kỹ thuật đủ để làm CP3; việc còn lại là **neo đúng** `vlearn-pack`, **chạy AI thật**, **có số đo + 2 bằng chứng**.
+**Kết luận:** A/B đủ corpus + golden + run-01. C: AI pipeline + Streamlit. Còn **D**: live + video 30s.
 
 ---
 

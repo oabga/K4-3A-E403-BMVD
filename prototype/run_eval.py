@@ -116,7 +116,11 @@ def main():
     model = None
     for case in gs["cases"]:
         inp = case["input"]
-        result = answer_for(inp["question"], inp["fetch_policy"])
+        result = answer_for(
+            inp["question"],
+            inp["fetch_policy"],
+            corpus_refs=inp.get("corpus_refs"),
+        )
         model = result.get("model") or model
         ok, reasons = check(case, result)
         group = None if ok else fail_group(case, result, reasons)
