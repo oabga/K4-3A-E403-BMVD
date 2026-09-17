@@ -2,8 +2,10 @@
 
 Bổ sung mining `data/` (chuẩn A). Form này lấy `%` xác nhận + quote. ~3 phút.
 
+> **Trạng thái CP4:** file này là **bản câu hỏi**. Repo **chưa** có export trả lời → `spec.md` / `tong-hop.md` **không** khóa số `n`/% từ form. Khi có sheet, lưu vào `evidence/` rồi mới cập nhật.
+
 - Link form: https://forms.gle/K4BMVDVLearnExtend24
-- Ngày gửi: 12/09/2026 (nhắc lại 13/09/2026)
+- Ngày gửi (dự kiến / đã gửi nếu có): 12/09/2026 (nhắc lại 13/09/2026)
 - Kênh gửi: Zalo lớp khóa 4 · Zone 3A
 
 ---

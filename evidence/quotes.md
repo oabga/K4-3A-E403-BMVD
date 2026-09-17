@@ -1,12 +1,22 @@
-# Quote nguyên văn — NEED_EXTERNAL / tự tìm ngoài
+# Quote nguyên văn — đã đối chiếu `tutor_turns.csv`
 
-Mining: câu hỏi log (`tutor_turns.csv`). Form: khảo sát học viên VLearn khóa 4. Copy đúng lời. Đã ẩn danh theo quy định bảo mật.
+Chỉ lấy `is_preset = False`. Cột quote = **thân chat** (dòng sau prefix trang/đoạn chọn). Mỗi `turn_id` đã mở lại trên CSV trước khi đưa vào `spec.md`.
 
-| # | Vai trò | Nguồn (log file / form #, ngày) | Quote nguyên văn | Phân loại kịch bản |
+| # | Vai trò | Nguồn (`turn_id`, `asked_at_vn`) | Quote nguyên văn (thân chat) | Nhãn kịch bản (gán tay) |
 |---|---|---|---|---|
-| 1 | HV | `tutor_turns.csv` (T01402, 2026-07-28) | "Cho em hỏi cơ chế Self-Attention trong Transformer khác gì với cơ chế Attention trong RNN/LSTM ngày xưa vậy ạ? Slide chỉ ghi công thức mà không so sánh." | `NEED_EXTERNAL` (So sánh mở rộng) |
-| 2 | HV | `tutor_turns.csv` (T02814, 2026-08-01) | "Trong thực tế khi triển khai chatbot doanh nghiệp thì hiện tượng Context Rot xảy ra ở ngưỡng bao nhiêu token và cách khắc phục thế nào ngoài việc cắt ngắn context?" | `NEED_EXTERNAL` (Ví dụ thực tế ngoài slide) |
-| 3 | HV | Form khảo sát #04 (2026-09-12) | "Nhiều khi đọc slide chỉ có vài gạch đầu dòng về Tokenizer, mình muốn biết bảng tra token tiếng Việt của GPT-4 ở đâu nhưng hỏi tutor thì tutor nói không có trong tài liệu rồi thôi, mình phải tự Google mất 25 phút." | `NEED_EXTERNAL` (Xác nhận Pain point) |
-| 4 | HV | Form khảo sát #11 (2026-09-13) | "Tutor có thể cho mình xin mã DOI và link bài báo gốc Attention Is All You Need của nhóm tác giả Google năm 2017 để trích dẫn vào bài tập không?" | `CANNOT_FETCH` (Yêu cầu DOI/Paper ngoài) |
-| 5 | HV | `tutor_turns.csv` (T05120, 2026-08-10) | "Tutor giải và viết hộ mình toàn bộ code bài tập lab 1 về tính toán token và gọi API để nộp bài với, mình đang bận quá." | `OUT_OF_SCOPE` (Nhờ làm hộ bài tập) |
-| 6 | HV | `tutor_turns.csv` (T06319, 2026-08-16) | "giải thích giúp em cái này với" | `ASK_AGAIN` (Câu hỏi cộc lốc, mơ hồ) |
+| 1 | HV | `tutor_turns.csv` (T00154, 2026-07-23 15:34) | chi tiết hơn về lịch sử của AI, 2 mùa đông của AI, và spring | Đào sâu hơn bullet trên trang (corpus có thể đủ / thiếu tùy excerpt) |
+| 2 | HV | `tutor_turns.csv` (T00839, 2026-07-28 10:05) | cho tao ví dụ thực tế | Xin ví dụ thực tế — thường vượt bullet slide → ứng viên `NEED_EXTERNAL` |
+| 3 | HV | `tutor_turns.csv` (T01749, 2026-07-30 10:09) | tôi muốn đọc paper về attetion, bạn có thể cung cấp cơ chế self-attention cho tôi được không | Đòi paper / cơ chế sâu — tutor trả lời slide không đủ chi tiết → `NEED_EXTERNAL` / `CANNOT_FETCH` tùy policy fetch |
+| 4 | HV | `tutor_turns.csv` (T01836, 2026-07-30 10:14) | có thể cho tôi bài paper về agent không | Xin paper ngoài tài liệu lớp → `NEED_EXTERNAL` hoặc `CANNOT_FETCH` |
+| 5 | HV | `tutor_turns.csv` (T00061, 2026-07-23 14:35) | giải thích kĩ slide 18 | Hỏi đúng trang nhưng tutor: *không tìm thấy nội dung trang 18 trong dữ liệu* → gap retrieval / corpus |
+| 6 | HV | `tutor_turns.csv` (T00024, 2026-07-23 14:23) | Tui không hiểu | Câu mơ hồ, không chỉ khái niệm → `ASK_AGAIN` |
+| 7 | HV | `tutor_turns.csv` (T01903, 2026-07-30 10:17) | viết giúp tôi tổng hợp nọi dung slide này | Nhờ viết hộ bài tổng hợp → gần `OUT_OF_SCOPE` / ngoài lát cắt ôn hiểu |
+
+## Cách kiểm lại (bắt buộc trước khi đưa vào spec)
+
+```bash
+# ví dụ
+.venv/bin/python -c "import pandas as pd; df=pd.read_csv('data/vlearn-pack/chatlog/tutor_turns.csv'); print(df[df.turn_id=='T01749'][['turn_id','asked_at_vn','is_preset','student_question']].to_string())"
+```
+
+Không dùng quote form khảo sát trong bảng này: repo **chưa** có file kết quả Google Form để đối chiếu.

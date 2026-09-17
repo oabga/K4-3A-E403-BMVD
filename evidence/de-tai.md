@@ -59,7 +59,7 @@ Thư mục `data/` (slide, log hỏi–đáp **được phép**):
 
 ## Việc làm ngay
 
-1. Mining `data/` → số câu `IN_CORPUS` vs `NEED_EXTERNAL` (`evidence/mining.md`).
-2. Gửi form `khao-sat.md` cho HV (quote + % xác nhận job này).
-3. Mời ≥5 sinh viên ngoài nhóm làm willing users (canvas §04).
-4. Điền spec trước 21:00 17/9.
+1. Mining `data/` → số pack + heuristic + quote verify `turn_id` (`evidence/mining.md`, `quotes.md`) — không bịa % nhãn thủ công.
+2. Form `khao-sat.md`: chỉ đưa % vào spec khi có export phản hồi trong `evidence/`.
+3. Mời ≥2 sinh viên ngoài nhóm làm willing users (canvas §04).
+4. Điền / khóa `spec.md` trước 21:00 17/9.

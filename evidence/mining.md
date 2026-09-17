@@ -1,45 +1,58 @@
-# Mining chuẩn A — Log trong `data/`
+# Mining chuẩn A — Log trong `data/vlearn-pack`
 
-Canvas CP1 & Đề tài VLearn Extend: Phân tích dữ liệu thực tế từ `data/vlearn-pack/chatlog/tutor_turns.csv` và `DATA_DICTIONARY.md`.
-
----
-
-## 1. Phương pháp phân loại & đếm
-
-* **Tổng tập dữ liệu nguồn:** 13.494 lượt hỏi-đáp thật giữa học viên và AI tutor trên nền tảng VLearn.
-* **Bộ lọc trước khi đếm:** Lọc bỏ 22,7% câu hỏi mẫu bấm sẵn của giao diện (`is_preset = True`, 3.067 lượt) để phản ánh đúng hành vi hỏi thật của người học.
-* **Quy mô mẫu phân tích sâu:** Rút ngẫu nhiên $n_{log} = 200$ lượt hỏi-đáp thật (`is_preset = False`) để gán nhãn thủ công theo 4 nhóm.
+Nguồn: `data/vlearn-pack/chatlog/tutor_turns.csv` (+ số tổng hợp đã công bố trong `data/vlearn-pack/README.md`).  
+**Không** dùng bảng “gán nhãn thủ công n=200 → 39% NEED_EXTERNAL” — bản đó không có file nhãn kèm theo và **không tái lập được** trên CSV.
 
 ---
 
-## 2. Tiêu chí gắn nhãn
+## 1. Quy mô & bộ lọc
 
-| Nhãn | Tiêu chí nhận diện khi đếm | Ý nghĩa thực tế |
+| Chỉ số | Giá trị | Ghi chú |
 |---|---|---|
-| `IN_CORPUS` | Slide và transcript bài học đã có đủ thông tin để trả lời; có mốc trang hoặc dòng cụ thể để trích dẫn. | Học viên ôn lại bài đúng trọng tâm slide. |
-| `NEED_EXTERNAL` | Slide chỉ có bullet ngắn, học viên hỏi xin: "ví dụ thực tế hơn", "định nghĩa đầy đủ toán học", "khác gì với công cụ X", "áp dụng thực tế ra sao", "đọc thêm ở đâu". | **Xác nhận nỗi đau cốt lõi của đề tài:** Tài liệu mỏng, học viên có nhu cầu hiểu sâu/rộng hơn. |
-| `OUT_OF_SCOPE` | Nhờ giải hộ bài tập tuần để nộp bài, hỏi bài tập môn khác, hoặc thử prompt injection ("SYSTEM_OVERRIDE"). | Đòi hỏi vượt thẩm quyền của AI tutor. |
-| `CANNOT_JUDGE` | Câu hỏi quá ngắn, cộc lốc ("giải thích cái này", "hả?"), không kèm đoạn chọn cụ thể. | Cần cơ chế hỏi lại (`ASK_AGAIN`). |
+| Tổng lượt | **13.494** | HV × AI tutor |
+| `is_preset = True` | **3.067 (22,7%)** | Câu mẫu bấm sẵn UI — tách khi nói về hành vi tự hỏi |
+| `is_preset = False` | **10.427** | Câu tự gửi (có thể kèm đoạn bôi đen) |
 
 ---
 
-## 3. Bảng số liệu thực nghiệm sau khi đếm ($n_{log} = 200$)
+## 2. Pain đo được trên **toàn tập** (không cần mẫu 200)
 
-* **Tổng số câu hỏi đã phân tích (`n_log`):** **200**
-* **`IN_CORPUS`:** **88 câu (44.0%)** — Kiến thức có sẵn trong tài liệu.
-* **`NEED_EXTERNAL`:** **78 câu (39.0%)** — **Tỷ lệ xác nhận Pain Point cho tính năng VLearn Extend.** Học viên khao khát nguồn mở rộng đáng tin cậy.
-* **`OUT_OF_SCOPE`:** **22 câu (11.0%)** — Cần cơ chế từ chối lịch sự và an toàn.
-* **`CANNOT_JUDGE` / `ASK_AGAIN`:** **12 câu (6.0%)** — Cần AI chủ động hỏi lại để thu hẹp phạm vi.
+Các số này khớp pack README / cột CSV:
 
----
-
-## 4. Các khiếm khuyết hệ thống đo được từ toàn bộ 13.494 lượt chatlog
-
-1. **28.0% (3.781 lượt) câu trả lời của AI tutor không hề có trích dẫn nguồn (`has_citation = False`):** Dẫn đến tình trạng học viên không biết thông tin AI nói lấy từ đâu, dễ bị ảo giác hoặc lệch bài.
-2. **AI Tutor gần như không có phản xạ hỏi lại (Socratic method):** Nước đi `ask_probing_question` chỉ xuất hiện **28 lượt / 13.494 lượt** (chưa đầy 0,2%). Khi gặp câu hỏi mơ hồ, tutor vẫn cố đoán và xổ một tràng lý thuyết dài 90% là `review_concept` (12.127 lượt).
-3. **Mức độ tương tác đánh giá rất thấp:** Chỉ **1,3% lượt (177 lượt)** có rating; `understanding_level` gần như rỗng (20 lượt), chứng tỏ học viên chưa hài lòng hoặc bỏ qua phản hồi.
+| Tín hiệu | Số | Ý nghĩa cho VLearn Extend |
+|---|---|---|
+| `has_citation = False` | **3.781 / 13.494 (28,0%)** | Tutor trả lời không trích dẫn — khó đối chiếu với bài |
+| `move_used = ask_probing_question` | **28 / 13.494 (~0,2%)** | Gần như không hỏi lại khi câu mơ hồ |
+| `move_used = review_concept` | **12.127 / 13.494 (~90%)** | Đa số là giảng lại khái niệm, kể cả khi thiếu căn cứ trang |
 
 ---
 
-## 5. Dẫn chứng nguyên văn
-Đã trích xuất 6 câu hỏi nguyên văn điển hình từ log và form khảo sát lưu tại [`evidence/quotes.md`](quotes.md).
+## 3. Heuristic trên câu tự gửi (`is_preset = False`, n = 10.427)
+
+Đây là **lọc từ khóa**, không phải gán nhãn vàng 4 lớp trên 200 dòng. Dùng để chứng minh pain **có mặt trong log**, không để claim “39% NEED_EXTERNAL”.
+
+| Nhóm heuristic | Pattern (tóm tắt) | Số lượt | ~% trên free-text |
+|---|---|---|---|
+| Đào sâu / so sánh / ví dụ thực tế / paper | `chi tiết hơn\|sâu hơn\|ví dụ thực tế\|paper\|DOI\|scholar\|khác gì\|…` | **186** | **~1,8%** |
+| Trong đó nhắc paper / DOI / scholar / bài báo | `paper\|DOI\|scholar\|bài báo` | **8** | hiếm nhưng rõ nhu cầu ngoài slide |
+| Tutor báo không tìm thấy / không có trong tài liệu | `không tìm thấy\|không có trong slide\|…` trên `tutor_reply` | **666** toàn tập · **595** khi câu HV free-text | **~4,9%** toàn tập · **~5,7%** free |
+
+**Đọc số đúng:** phần lớn chatlog vẫn là hỏi–giải thích **trên trang/slide**. Pain “cần nguồn ngoài có điều kiện” **không** phải đa số tuyệt đối; nó hiện ở (a) xin đào sâu/ví dụ/paper, (b) tutor **không retrieve được trang**, (c) **28% không citation**, (d) gần như **không ASK_AGAIN**.
+
+---
+
+## 4. Tiêu chí nhãn dùng cho prototype / golden (thiết kế)
+
+| Nhãn | Khi nào dùng (spec / eval) |
+|---|---|
+| `IN_CORPUS` | Excerpt lớp đủ → trả lời + `D1-Pxx` |
+| `NEED_EXTERNAL` | Corpus mỏng / xin ví dụ–paper–thực tế ngoài bài → không giả vờ trong slide |
+| `CANNOT_FETCH` | Policy cấm fetch / fail sau retry → nói thẳng, không bịa DOI |
+| `ASK_AGAIN` | Câu cộc / không chỉ khái niệm |
+| `OUT_OF_SCOPE` | Làm hộ bài nộp, ngoài môn |
+
+---
+
+## 5. Quote nguyên văn
+
+≥5 câu đã verify `turn_id`: [`quotes.md`](quotes.md).

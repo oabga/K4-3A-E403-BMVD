@@ -1,35 +1,41 @@
-# Tổng hợp — Sau khai phá Mining & Khảo sát Form
+# Tổng hợp — Mining (chuẩn A) + trạng thái khảo sát
+
+Cập nhật sau khi **đối chiếu CSV** và gỡ số/mining/quote không tái lập được.
 
 ---
 
-## 1. Kết quả Mining Chatlog (`evidence/mining.md`)
+## 1. Mining chatlog (chuẩn A) — dùng cho spec §1–§2
 
-* **Quy mô mẫu phân tích (`n_log`):** **200** lượt hỏi-đáp thật (đã loại bỏ 22,7% câu hỏi mẫu).
-* **% `NEED_EXTERNAL` (Nhu cầu mở rộng nguồn ngoài):** **39.0%** (78/200) — **Con số chứng minh Pain point chính của đề tài.**
-* **% `IN_CORPUS` (Đã có trong tài liệu slide):** **44.0%** (88/200).
-* **% `OUT_OF_SCOPE` (Ngoài phạm vi / làm hộ bài):** **11.0%** (22/200).
-* **% `CANNOT_JUDGE` (Mơ hồ / cần hỏi lại):** **6.0%** (12/200).
-* **Tỷ lệ trả lời không nguồn của AI Tutor hiện tại:** **28.0%** (3.781/13.494 lượt).
+Nguồn chi tiết: `evidence/mining.md`, `evidence/quotes.md`.
 
----
+| Tín hiệu | Số | Dùng để chứng minh gì |
+|---|---|---|
+| Tổng lượt / free-text | 13.494 / 10.427 | Quy mô log thật |
+| Không citation | **28,0%** (3.781) | Khó tin / khó đối chiếu bài |
+| Gần như không hỏi lại | **28** lượt `ask_probing_question` | Cần nhánh `ASK_AGAIN` |
+| Tutor “không tìm thấy / không có trong tài liệu” (heuristic) | **666** (toàn tập) | Gap corpus/retrieval trên trang bài |
+| Xin đào sâu / ví dụ thực tế / paper… (heuristic free-text) | **186 (~1,8%)** | Nhu cầu vượt bullet — **có nhưng không phải 39%** |
+| Xin paper/DOI/scholar (heuristic) | **8** | Case rõ `NEED_EXTERNAL` / `CANNOT_FETCH` |
 
-## 2. Kết quả Khảo sát Học viên (`evidence/khao-sat.md`)
-
-* **Quy mô mẫu khảo sát (`n`):** **24** học viên khóa 4 đang học VLearn/LMS.
-* **Tỷ lệ xác nhận nhu cầu VLearn Extend (Câu 7):** **83.3% (20/24)** học viên đồng ý rằng: *"Khi tài liệu buổi học chưa đủ để hiểu sâu nội dung trên slide, tôi muốn được chỉ nguồn bổ sung đáng tin và phân biệt rõ đâu là trong bài, đâu là ngoài bài"*.
-* **Tần suất phải tự ra ngoài tìm kiếm (Câu 4):** **70.8%** học viên phải tự tìm kiếm Google/Scholar/YouTube từ 1–2 lần/tuần đến hầu hết các buổi học.
-* **Thời gian tiêu tốn mỗi lần tự tìm ngoài (Câu 5):** Trung bình **15–30 phút/lần**; hơn 40% cảm thấy bối rối vì không biết nguồn nào đáng tin cậy để đối chiếu với bài học.
-* **Trải nghiệm với AI tutor hiện tại (Câu 6):** 62.5% cho biết khi hỏi câu rộng/sâu hơn slide thì tutor hoặc từ chối hoặc trả lời chung chung không có nguồn kiểm chứng.
+**Không còn dùng:** “78/200 = 39% NEED_EXTERNAL” (không có file nhãn mẫu).
 
 ---
 
-## 3. Quyết định lựa chọn giải pháp & Impact
+## 2. Khảo sát form (chuẩn B) — chưa khóa số trong repo
 
-* **CHỌN: VLearn Extend**
-  * Tự động kiểm tra tài liệu bài giảng trước (`IN_CORPUS`).
-  * Chỉ mở rộng nguồn ngoài có điều kiện kèm trích dẫn đối chiếu khi tài liệu mỏng (`NEED_EXTERNAL`).
-  * Cảnh báo rõ ràng và đưa checklist tự tìm khi không lấy được web/DOI (`CANNOT_FETCH`), tuyệt đối không bịa.
-  * Từ chối các yêu cầu giải hộ bài tập (`OUT_OF_SCOPE`).
-* **ỨNG VIÊN BỊ LOẠI 1 — "Chỉ trả lời đóng khung trong slide":** VLearn hiện tại đã làm việc này nhưng tạo ra nỗi đau lớn: học viên vẫn phải rời khỏi nền tảng tự tìm ngoài mất 20–30 phút.
-* **ỨNG VIÊN BỊ LOẠI 2 — "Tự động làm hộ bài tập từ web":** Chi phí sai lệch kiến thức và vi phạm liêm chính học thuật quá cao (Cost-of-error cực lớn).
-* **Phân loại Spec:** [x] Tính năng mới trên nền tảng VLearn Tutor (`spec.md`).
+- Draft câu hỏi + link: `evidence/khao-sat.md`
+- **Repo chưa có** export phản hồi (CSV/sheet/ảnh) → **không** đưa `n = 24`, 83,3%, 70,8%, quote form #04/#11 vào spec như số đã đo.
+- Nếu sau này có sheet: bổ sung vào đây + `quotes.md`, rồi mới cập nhật §1 spec (changelog §9).
+
+---
+
+## 3. Quyết định lát cắt (vẫn giữ VLearn Extend)
+
+Chọn **A — mở nguồn ngoài có điều kiện** vì:
+
+1. Log cho thấy HV **có** hỏi đào sâu / ví dụ thực tế / paper; tutor hiện tại hoặc giảng trong khung slide, hoặc **không tìm thấy trang**, hoặc **không citation**.
+2. Canvas CP1 + JTBD trong `de-tai.md` khớp nhãn `IN_CORPUS` / `NEED_EXTERNAL` / `CANNOT_FETCH`.
+3. Loại “chỉ bám slide”: đã có sẵn, không xử lý gap khi corpus mỏng hoặc retrieve fail.
+4. Loại “làm hộ bài từ web”: cost-of-error cao; golden `OUT_OF_SCOPE` (GS-14/15).
+
+**Phân loại Spec:** [x] Tính năng mới trên chỗ hỏi đáp VLearn (`spec.md`).
