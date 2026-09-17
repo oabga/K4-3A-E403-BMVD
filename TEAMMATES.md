@@ -1,10 +1,10 @@
-# Thành viên & vai CP3
+# Thành viên & vai
 
-Điền tên. Chi tiết việc: `CP3-phan-cong.md`.
+Chi tiết CP3: `CP3-phan-cong.md`. Spec CP4: `spec.md`.
 
 | Ghế | Vai | Tên |
 |---|---|---|
 | A | Evidence + corpus | Khải Vũ |
 | B | Golden set + Eval | Thân Tiến Đạt |
 | C | AI thật + Prototype | Bảo |
-| D | Bằng chứng (live + video) | Minh |
+| D | Bằng chứng (live + video) + Spec CP4 | Minh |
