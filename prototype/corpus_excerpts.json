@@ -1,0 +1,66 @@
+{
+  "pack": "vlearn-pack-day01",
+  "note": "Trích đoạn chuẩn kiến thức Day 1 (AI & LLM Foundation) từ transcript-04-clean.md và d1-slide-hackathon.pdf",
+  "excerpts": [
+    {
+      "id": "D1-P01",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Bức tranh lớn: AI, Machine Learning, Deep Learning và Generative AI [T04-015]",
+      "text": "AI là hệ thống mô phỏng trí thông minh con người. Machine learning là tập con của AI, máy tự học từ dữ liệu thay vì định nghĩa luật bằng tay. Deep learning là tập con của ML, sử dụng mạng neuron nhiều tầng mô phỏng não bộ. Generative AI là tầng trong cùng, chuyên tạo sinh nội dung như văn bản, hình ảnh, mã nguồn."
+    },
+    {
+      "id": "D1-P02",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Turing Test của Alan Turing [T04-018]",
+      "text": "Bài kiểm tra Turing test đặt ra năm 1950: một người thử nghiệm đặt câu hỏi cho máy tính và người thật ở hai phòng riêng biệt. Nếu người hỏi không thể phân biệt được đâu là máy đâu là người từ câu trả lời, máy tính đó đã vượt qua bài test."
+    },
+    {
+      "id": "D1-P03",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Lịch sử AI, Symbolic AI và Mùa đông AI [T04-024, T04-028]",
+      "text": "Năm 1956 khai sinh AI với hướng Symbolic AI: tiếp cận bằng cách viết các luật logic cứng để máy học theo. Giới hạn là bùng nổ tổ hợp và không thể liệt kê hết luật của thế giới thực. Hệ chuyên gia sau đó cũng gặp bế tắc vì chi phí bảo trì luật quá cao, dẫn đến hai mùa đông AI khi cộng đồng mất niềm tin."
+    },
+    {
+      "id": "D1-P04",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Deep Learning và bộ dữ liệu ImageNet [T04-030, T04-031]",
+      "text": "Deep learning (từ 2006) xử lý dữ liệu qua mạng neuron nhiều lớp để tự động trích xuất đặc trưng mà không cần gán nhãn thủ công từng thuộc tính. Năm 2012 bùng nổ nhờ bộ dữ liệu ImageNet của Fei-Fei Li kết hợp cùng phần cứng GPU mạnh mẽ."
+    },
+    {
+      "id": "D1-P05",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "AlphaGo và Nước đi số 37 [T04-035, T04-036]",
+      "text": "Năm 2016, mô hình AlphaGo của DeepMind đánh bại kỳ thủ cờ vây Lee Sedol 4-1. Nước đi số 37 nổi tiếng là nước đi chưa từng có trong lịch sử loài người, do AlphaGo tự khám phá sau hàng triệu ván cờ tự chơi với chính nó."
+    },
+    {
+      "id": "D1-P06",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Kiến trúc Transformer và Paper Attention Is All You Need [T04-038, T04-040]",
+      "text": "Kiến trúc Transformer được Google công bố năm 2017 trong bài báo 'Attention Is All You Need'. Khác với RNN xử lý tuần tự từng từ dễ quên ngữ cảnh dài, Transformer sử dụng cơ chế Self-Attention để quan sát toàn bộ câu và tính toán ma trận trọng số tương quan giữa các từ quan trọng."
+    },
+    {
+      "id": "D1-P07",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Bản chất LLM: Dự đoán Token tiếp theo [T04-047]",
+      "text": "Mô hình ngôn ngữ lớn (LLM) bản chất là cỗ máy xác suất: dự đoán từ hoặc token tiếp theo dựa trên chuỗi từ phía trước trong vòng lặp liên tục (Next-token prediction). LLM không thực sự hiểu tri thức theo nghĩa sinh học mà đang mô phỏng cấu trúc ngôn ngữ."
+    },
+    {
+      "id": "D1-P08",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Hiện tượng Ảo giác (Hallucination) của LLM [T04-048]",
+      "text": "Do bản chất là ghép từ theo xác suất thống kê để câu văn có vẻ hợp lý và thuận mắt, LLM có thể tự tin khẳng định thông tin hoàn toàn sai lệch thực tế. Đây gọi là hiện tượng ảo giác (hallucination), đòi hỏi phải có cơ chế kiểm chứng nguồn hoặc RAG."
+    },
+    {
+      "id": "D1-P09",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Khái niệm Token và Chi phí Token [T04-049, T04-050]",
+      "text": "Token là đơn vị cơ bản mà mô hình LLM xử lý. 1 token tiếng Anh trung bình khoảng 4 ký tự. Tiếng Việt có dấu nên thường tốn số lượng token gấp 1.3 đến 1.5 lần so với tiếng Anh cho cùng một độ dài câu, dẫn đến chi phí gọi API cao hơn."
+    },
+    {
+      "id": "D1-P10",
+      "lesson": "Day 1 - AI & LLM Foundation",
+      "title": "Cửa sổ ngữ cảnh (Context Window) và Context Rot [T04-051, T04-053]",
+      "text": "Context window là giới hạn lượng token mô hình có thể tiếp nhận trong một lượt. Hiện tượng Context Rot xảy ra khi nhồi nhét quá nhiều thông tin (ví dụ 1 triệu token) khiến mô hình bị phân tâm, chú ý sai chỗ và suy giảm độ chính xác. Quản lý context gọn gàng và chất lượng quan trọng hơn mở rộng context."
+    }
+  ]
+}

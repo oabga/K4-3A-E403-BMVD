@@ -1,0 +1,11 @@
+{
+  "run_id": "run-01",
+  "checkpoint": "CP3",
+  "prompt_file": "eval/prompt.md",
+  "golden_set": "eval/golden-set.json",
+  "model_env": "OPENAI_MODEL hoặc GEMINI_MODEL",
+  "fetch": "MOCK",
+  "retry": "MOCK tối đa 2 lần",
+  "corpus": "prototype/corpus_excerpts.json (mã tham chiếu, không data pack)",
+  "note": "CP3 thống nhất tiêu chí đạt từng case. CP4 mới khóa quality bar trên spec.md."
+}

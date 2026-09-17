@@ -1,0 +1,10 @@
+{
+  "note": "MOCK — không phải web thật, không DOI. Pipeline nạp các đoạn này khi fetch_policy=allow_mock.",
+  "sources": [
+    {
+      "id": "MOCK-EXT-01",
+      "title": "[MOCK] Giao trinh nhap mon — variable vs constant",
+      "text": "Hang (constant) la ten gan gia tri khong doi sau khi gan. Bien thi gan lai duoc. Vi du doi thuc MOCK: so ghe rap trong mot suat la hang; so ghe trong con lai la bien. Mutable identifier: ten co the doi gia tri."
+    }
+  ]
+}

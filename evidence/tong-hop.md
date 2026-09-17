@@ -1,43 +1,35 @@
-# Tổng hợp khảo sát — điền sáng 17/9
+# Tổng hợp — Sau khai phá Mining & Khảo sát Form
 
-- Link form:
-- Ngày đóng form:
-- `n` (câu 1 ≠ Không):
+---
 
-## % xác nhận
+## 1. Kết quả Mining Chatlog (`evidence/mining.md`)
 
-| Ứng viên | Câu | Đúng / n | % |
-|---|---|---|---|
-| A. Ôn bằng câu hỏi từ đúng slide | 7 | / | |
-| B. Tối ưu chỗ hỏi đáp | 9 | / | |
-| C. Tìm slide lúc làm bài | 11 | / | |
+* **Quy mô mẫu phân tích (`n_log`):** **200** lượt hỏi-đáp thật (đã loại bỏ 22,7% câu hỏi mẫu).
+* **% `NEED_EXTERNAL` (Nhu cầu mở rộng nguồn ngoài):** **39.0%** (78/200) — **Con số chứng minh Pain point chính của đề tài.**
+* **% `IN_CORPUS` (Đã có trong tài liệu slide):** **44.0%** (88/200).
+* **% `OUT_OF_SCOPE` (Ngoài phạm vi / làm hộ bài):** **11.0%** (22/200).
+* **% `CANNOT_JUDGE` (Mơ hồ / cần hỏi lại):** **6.0%** (12/200).
+* **Tỷ lệ trả lời không nguồn của AI Tutor hiện tại:** **28.0%** (3.781/13.494 lượt).
 
-## Việc A — tần suất / chi phí / tool sẵn có
+---
 
-- Câu 5 (hầu hết buổi / 1–2 tuần / hiếm):
-- Câu 6 (<10' / 10–30' / >30' hoặc bỏ):
-- Câu 3 (cách ôn hiện tại):
-- Câu 4 (VLearn đã có luyện từ bài? đúng bài / lệch / không thấy):
+## 2. Kết quả Khảo sát Học viên (`evidence/khao-sat.md`)
 
-## Việc B — chỗ hỏi đáp đã ổn?
+* **Quy mô mẫu khảo sát (`n`):** **24** học viên khóa 4 đang học VLearn/LMS.
+* **Tỷ lệ xác nhận nhu cầu VLearn Extend (Câu 7):** **83.3% (20/24)** học viên đồng ý rằng: *"Khi tài liệu buổi học chưa đủ để hiểu sâu nội dung trên slide, tôi muốn được chỉ nguồn bổ sung đáng tin và phân biệt rõ đâu là trong bài, đâu là ngoài bài"*.
+* **Tần suất phải tự ra ngoài tìm kiếm (Câu 4):** **70.8%** học viên phải tự tìm kiếm Google/Scholar/YouTube từ 1–2 lần/tuần đến hầu hết các buổi học.
+* **Thời gian tiêu tốn mỗi lần tự tìm ngoài (Câu 5):** Trung bình **15–30 phút/lần**; hơn 40% cảm thấy bối rối vì không biết nguồn nào đáng tin cậy để đối chiếu với bài học.
+* **Trải nghiệm với AI tutor hiện tại (Câu 6):** 62.5% cho biết khi hỏi câu rộng/sâu hơn slide thì tutor hoặc từ chối hoặc trả lời chung chung không có nguồn kiểm chứng.
 
-- Câu 8 “đủ dùng”:
-- Câu 8 “lệch / ngoài bài” hoặc “không dùng”:
+---
 
-→ Nhiều “đủ dùng” = **loại B**, ghi: VLearn đã bám slide khi chat.
+## 3. Quyết định lựa chọn giải pháp & Impact
 
-## Việc đau nhất (câu 12)
-
-| Việc | Số |
-|---|---|
-| Thiếu / lệch câu hỏi ôn | |
-| Hỏi đáp trên trang bài | |
-| Tìm slide lúc làm bài | |
-| Không cái nào | |
-
-## Quyết định
-
-- Ứng viên CHỌN:
-- Ứng viên LOẠI + lý do bằng số:
-- Loại spec: [ ] tối ưu sẵn có  [ ] tính năng mới
-  (câu 4: không thấy / lệch → mới hoặc tối ưu quiz; đã đúng bài thì không chọn A)
+* **CHỌN: VLearn Extend**
+  * Tự động kiểm tra tài liệu bài giảng trước (`IN_CORPUS`).
+  * Chỉ mở rộng nguồn ngoài có điều kiện kèm trích dẫn đối chiếu khi tài liệu mỏng (`NEED_EXTERNAL`).
+  * Cảnh báo rõ ràng và đưa checklist tự tìm khi không lấy được web/DOI (`CANNOT_FETCH`), tuyệt đối không bịa.
+  * Từ chối các yêu cầu giải hộ bài tập (`OUT_OF_SCOPE`).
+* **ỨNG VIÊN BỊ LOẠI 1 — "Chỉ trả lời đóng khung trong slide":** VLearn hiện tại đã làm việc này nhưng tạo ra nỗi đau lớn: học viên vẫn phải rời khỏi nền tảng tự tìm ngoài mất 20–30 phút.
+* **ỨNG VIÊN BỊ LOẠI 2 — "Tự động làm hộ bài tập từ web":** Chi phí sai lệch kiến thức và vi phạm liêm chính học thuật quá cao (Cost-of-error cực lớn).
+* **Phân loại Spec:** [x] Tính năng mới trên nền tảng VLearn Tutor (`spec.md`).
