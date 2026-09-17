@@ -19,7 +19,7 @@
 | `data/` trên git | Không commit  | `.gitignore` có `data/` — đúng luật pack                         |
 | Khung CP3        | Có sẵn        | `eval/`, `prototype/`                                            |
 | Golden set       | **Lệch pack** | Đang ví dụ “Biến / int” — **phải viết lại** neo Day 1 hoặc Day 2 |
-| Corpus prototype | **Lệch pack** | `prototype/corpus_excerpts.json` vẫn mã `B3-`* giả               |
+| Corpus prototype | **Xong**      | Đã nạp 10 đoạn trích Day 1 vào `prototype/corpus_excerpts.json`  |
 | Run-01           | Chưa đo       | `eval/runs/run-01.md` trống số — thiếu API key / chưa chạy       |
 | Spec CP4         | Template      | Không khóa % ở CP3                                               |
 
@@ -91,14 +91,14 @@ D live + quay video (n=15, số đạt, %, 3 nhóm lỗi)
 
 ### A — Evidence + corpus
 
-- [ ] Chốt corpus chính: **Day 1** hoặc **Day 2** (một buổi cho prototype CP3).  
-- [ ] Đọc `slides/d1-…` hoặc `d2-…` + transcript khớp (`transcript-04` ~ Day1; `transcript-01/02/03` ~ Day2 — xem `transcript/README.md`).  
-- [ ] Mining chatlog (đọc `DATA_DICTIONARY.md` trước): lọc `is_preset`, ghi vài số (ví dụ % không citation) vào `evidence/mining.md`.  
-- [ ] ≥5 quote hoặc `turn_id` (+ 1 dòng ngữ cảnh) vào `evidence/quotes.md` — **không** dán nguyên CSV.  
-- [ ] Giao cho B/C: danh sách **8–15 đoạn text** (mã trang hoặc `[Txx-NNN]` + nội dung ngắn) đủ để trả lời case `IN_CORPUS`.  
-- [ ] Nhắc nhóm: không commit nguyên `tutor_turns.csv` / PDF lên remote công khai.
+- [x] Chốt corpus chính: **Day 1** (Day 1 — AI & LLM Foundation: Transformer, Attention, Token, Context Rot).  
+- [x] Đọc `slides/d1-…` + transcript khớp (`transcript-04-clean.md` ~ Day 1).  
+- [x] Mining chatlog (đọc `DATA_DICTIONARY.md` trước): lọc `is_preset`, ghi số (% NEED_EXTERNAL, % thiếu trích dẫn) vào `evidence/mining.md`.  
+- [x] ≥5 quote hoặc `turn_id` (+ 1 dòng ngữ cảnh) vào `evidence/quotes.md` — đã cập nhật 6 quote thực tế.  
+- [x] Giao cho B/C: danh sách **10 đoạn text** (mã `D1-P01` đến `D1-P10`) nạp vào `prototype/corpus_excerpts.json`.  
+- [x] Nhắc nhóm: không commit nguyên `tutor_turns.csv` / PDF lên remote công khai (đã cấu hình `.gitignore`).
 
-**Xong khi:** B biết hỏi gì trên buổi nào; C có đoạn bỏ vào notebook.
+**Xong:** B đã có căn cứ viết Golden Set; C đã có kho corpus bài học Day 1 trong prototype.
 
 ---
 
