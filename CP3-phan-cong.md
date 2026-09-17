@@ -48,12 +48,12 @@
 ## 2. Bốn ghế (điền tên)
 
 
-| Ghế   | Tên thành viên | Vai CP3             | File / artifact chịu trách nhiệm                                            |
-| ----- | -------------- | ------------------- | --------------------------------------------------------------------------- |
-| **A** | *(*            | Evidence + corpus   | `evidence/mining.md`, `evidence/quotes.md`, trích corpus ngắn cho prototype |
-| **B** | *(điền)*       | Golden set + Eval   | `eval/golden-set.md`, `eval/golden-set.json`, `eval/runs/run-01.`*          |
-| **C** | *(điền)*       | AI thật + Prototype | `eval/prompt.md`, `prototype/`*, `.env` (không commit)                      |
-| **D** | *(điền)*       | Bằng chứng nộp CP3  | Kịch bản live + video 30s; checklist nộp; điều phối demo                    |
+| Ghế   | Tên thành viên    | Vai CP3             | File / artifact chịu trách nhiệm                                            |
+| ----- | ----------------- | ------------------- | --------------------------------------------------------------------------- |
+| **A** | *( Khải Vũ)*      | Evidence + corpus   | `evidence/mining.md`, `evidence/quotes.md`, trích corpus ngắn cho prototype |
+| **B** | *(Thân Tiến Đạt)* | Golden set + Eval   | `eval/golden-set.md`, `eval/golden-set.json`, `eval/runs/run-01.`*          |
+| **C** | *(Bảo)*           | AI thật + Prototype | `eval/prompt.md`, `prototype/`*, `.env` (không commit)                      |
+| **D** | *(Minh)*          | Bằng chứng nộp CP3  | Kịch bản live + video 30s; checklist nộp; điều phối demo                    |
 
 
 Canvas gốc có 5 vai (Spec / Prototype / Evidence / AI call / Eval+Demo). Với 4 người: **Spec để CP4**; CP3 gộp **Eval + Demo → B đo số, D nộp bằng chứng**.
