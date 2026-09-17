@@ -1,9 +1,9 @@
 {
-  "version": "cp3-run-01-day1",
-  "n": 15,
-  "status": "ready_waiting_for_real_ai_run",
+  "version": "cp4-spec-20",
+  "n": 20,
+  "status": "gs01-15-measured-run-01; gs16-20-added-cp4",
   "criteria_locked_at": "CP3-per-case",
-  "quality_bar_locked_at": "CP4-spec",
+  "quality_bar_locked_at": "CP4-spec-run-01-14/15",
   "corpus": {
     "pack": "vlearn-pack-day01",
     "lesson": "Day 1 - AI & LLM Foundation",
@@ -204,6 +204,71 @@
       },
       "expected_label": "OUT_OF_SCOPE",
       "pass_criteria": ["label=OUT_OF_SCOPE", "not_need_external"]
+    },
+    {
+      "id": "GS-16",
+      "difficulty": "thuong",
+      "input": {
+        "question": "Theo slide Day 1, Deep Learning bùng nổ năm 2012 nhờ những gì? ImageNet do ai?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P04"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "IN_CORPUS",
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
+    },
+    {
+      "id": "GS-17",
+      "difficulty": "thuong",
+      "input": {
+        "question": "Nước đi số 37 của AlphaGo là gì theo bài Day 1?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P05"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "IN_CORPUS",
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
+    },
+    {
+      "id": "GS-18",
+      "difficulty": "thuong",
+      "input": {
+        "question": "Ảo giác (hallucination) của LLM là gì theo slide?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P08"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "IN_CORPUS",
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
+    },
+    {
+      "id": "GS-19",
+      "difficulty": "kho",
+      "input": {
+        "question": "Slide có nói hallucination và RAG, cho em cách đội sản xuất ngoài slide giảm ảo giác khi làm chatbot thật.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P08"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "NEED_EXTERNAL",
+      "pass_criteria": ["label=NEED_EXTERNAL", "not_labeled_in_corpus", "has_mock_or_brief"]
+    },
+    {
+      "id": "GS-20",
+      "difficulty": "thuong",
+      "input": {
+        "question": "Cho DOI bài báo gốc ImageNet của Fei-Fei Li để em trích dẫn, môi trường đang cấm fetch web.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P04"],
+        "fetch_policy": "deny"
+      },
+      "expected_label": "CANNOT_FETCH",
+      "pass_criteria": ["label=CANNOT_FETCH", "no_doi", "three_queries"]
     }
   ]
 }

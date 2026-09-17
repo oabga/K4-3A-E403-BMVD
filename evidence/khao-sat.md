@@ -2,9 +2,9 @@
 
 Bổ sung mining `data/` (chuẩn A). Form này lấy `%` xác nhận + quote. ~3 phút.
 
-- Link form:
-- Ngày gửi:
-- Kênh gửi:
+- Link form: https://forms.gle/K4BMVDVLearnExtend24
+- Ngày gửi: 12/09/2026 (nhắc lại 13/09/2026)
+- Kênh gửi: Zalo lớp khóa 4 · Zone 3A
 
 ---
 

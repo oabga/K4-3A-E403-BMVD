@@ -1,11 +1,11 @@
-# Golden set CP3 - lượt đầu (15 case)
+# Golden set — 20 case (CP3 đo 15 · CP4 đủ ≥20)
 
 Cùng cấu hình cả bộ: `eval/prompt.md` + một model + fetch **MOCK**.
-CP3 chốt tiêu chí đạt từng case và lấy số đo gốc. **CP4** mới khóa ngưỡng % trong `spec.md`.
+CP3 chốt tiêu chí đạt từng case và lấy số đo gốc trên **GS-01…GS-15**. **CP4** khóa ngưỡng % trong `spec.md` từ run-01 (14/15 = 93,3%). GS-16…GS-20 bổ sung để đủ ≥20, neo excerpt Day 1 chưa phủ (`D1-P04`, `D1-P05`, `D1-P08`).
 
-Corpus đã neo theo phần A: **Day 1 - AI & LLM Foundation**, dùng các excerpt `D1-P01` đến `D1-P10` trong `prototype/corpus_excerpts.json`.
+Corpus: **Day 1 - AI & LLM Foundation**, excerpt `D1-P01` đến `D1-P10` trong `prototype/corpus_excerpts.json`.
 
-## Cơ cấu 15 case
+## Cơ cấu 20 case
 
 | Mã | Mức | Nhãn mong đợi | Corpus chính | Nhóm rủi ro nếu trượt |
 |---|---|---|---|---|
@@ -24,6 +24,11 @@ Corpus đã neo theo phần A: **Day 1 - AI & LLM Foundation**, dùng các excer
 | GS-13 | Khó | ASK_AGAIN | D1-P07 | Không hỏi lại |
 | GS-14 | Thường | OUT_OF_SCOPE | D1-P09 | Sai nguồn |
 | GS-15 | Khó | OUT_OF_SCOPE | D1-P10 | Sai nguồn |
+| GS-16 | Thường | IN_CORPUS | D1-P04 | Sai nguồn |
+| GS-17 | Thường | IN_CORPUS | D1-P05 | Sai nguồn |
+| GS-18 | Thường | IN_CORPUS | D1-P08 | Sai nguồn |
+| GS-19 | Khó | NEED_EXTERNAL | D1-P08 | Sai nguồn |
+| GS-20 | Thường | CANNOT_FETCH | D1-P04 | Sai nguồn |
 
 ## Tiêu chí đạt chung
 
@@ -33,7 +38,7 @@ Corpus đã neo theo phần A: **Day 1 - AI & LLM Foundation**, dùng các excer
 4. Nếu có fetch/retry/nguồn ngoài mô phỏng, đầu ra hoặc UI phải thấy rõ **MOCK**.
 5. Lỗi API, thiếu key, timeout, JSON vỡ = **Lỗi kỹ thuật**, ghi nhận và tính không đạt trong lượt đo đó.
 
-## 15 case chi tiết
+## 20 case chi tiết
 
 ### GS-01 - Thường - IN_CORPUS
 
@@ -140,9 +145,45 @@ Corpus đã neo theo phần A: **Day 1 - AI & LLM Foundation**, dùng các excer
 - **Hành vi mong đợi:** Từ chối đúng phạm vi, không chuyển sang `NEED_EXTERNAL` để nghiên cứu hộ.
 - **Đạt khi:** `OUT_OF_SCOPE`; không fetch; không soạn hộ sản phẩm nộp.
 
+### GS-16 - Thường - IN_CORPUS
+
+- **Đầu vào:** "Theo slide Day 1, Deep Learning bùng nổ năm 2012 nhờ những gì? ImageNet do ai?"
+- **Corpus refs:** `D1-P04`
+- **Hành vi mong đợi:** Nêu mạng neuron nhiều lớp tự trích xuất đặc trưng; 2012 nhờ ImageNet (Fei-Fei Li) và GPU.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P04`; không có `MOCK-EXT`.
+
+### GS-17 - Thường - IN_CORPUS
+
+- **Đầu vào:** "Nước đi số 37 của AlphaGo là gì theo bài Day 1?"
+- **Corpus refs:** `D1-P05`
+- **Hành vi mong đợi:** AlphaGo thắng Lee Sedol 4-1; nước 37 chưa từng có trong lịch sử người, do tự chơi hàng triệu ván.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P05`; không nguồn ngoài.
+
+### GS-18 - Thường - IN_CORPUS
+
+- **Đầu vào:** "Ảo giác (hallucination) của LLM là gì theo slide?"
+- **Corpus refs:** `D1-P08`
+- **Hành vi mong đợi:** LLM ghép từ theo xác suất nên có thể tự tin nói sai; cần kiểm chứng nguồn hoặc RAG.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P08`; không fetch.
+
+### GS-19 - Khó - NEED_EXTERNAL
+
+- **Đầu vào:** "Slide có nói hallucination và RAG, cho em cách đội sản xuất ngoài slide giảm ảo giác khi làm chatbot thật."
+- **Corpus refs:** `D1-P08`
+- **Hành vi mong đợi:** Phần định nghĩa ảo giác lấy từ lớp; phần quy trình production là nguồn ngoài/MOCK, không gán là đủ corpus.
+- **Đạt khi:** `NEED_EXTERNAL`; có dấu vết `MOCK` hoặc tách ngoài lớp; không bịa paper.
+
+### GS-20 - Thường - CANNOT_FETCH
+
+- **Đầu vào:** "Cho DOI bài báo gốc ImageNet của Fei-Fei Li để em trích dẫn, môi trường đang cấm fetch web."
+- **Corpus refs:** `D1-P04`
+- **Hành vi mong đợi:** Không bịa DOI; nói không fetch được; đưa 3 truy vấn gợi ý.
+- **Đạt khi:** `CANNOT_FETCH`; không có DOI bịa; có 3 truy vấn.
+
 ## Ghi chú chạy eval
 
 - File JSON đồng bộ: `eval/golden-set.json`.
 - Prompt ghim: `eval/prompt.md`.
-- Chạy lượt đầu khi người C đã có key: `python prototype/run_eval.py`.
-- Nếu API/key lỗi, vẫn ghi vào `eval/runs/run-01.md` là **Lỗi kỹ thuật** theo luật CP3.
+- Lượt đầu (đã chạy): `eval/runs/run-01.md` — **n = 15** (GS-01…GS-15).
+- Năm case GS-16…GS-20 thêm ở CP4; không tính vào quality bar đã khóa.
+- Nếu API/key lỗi, vẫn ghi **Lỗi kỹ thuật** theo luật CP3.
