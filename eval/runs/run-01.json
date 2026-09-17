@@ -1,0 +1,310 @@
+{
+  "run_id": "run-01",
+  "at": "2026-09-17T07:46:00.790983+00:00",
+  "model": "openai:gpt-4o-mini",
+  "prompt": "eval/prompt.md",
+  "n": 15,
+  "n_pass": 14,
+  "pct": 93.3,
+  "groups": {
+    "Sai nguồn": 1,
+    "Không hỏi lại": 0,
+    "Lỗi kỹ thuật": 0
+  },
+  "rows": [
+    {
+      "id": "GS-01",
+      "difficulty": "thuong",
+      "expected": "IN_CORPUS",
+      "got": "IN_CORPUS",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "AI là hệ thống mô phỏng trí thông minh con người [D1-P01]. Machine Learning là tập con của AI, cho phép máy tự học từ dữ liệu thay vì định nghĩa luật bằng tay [D1-P01]. Deep Learning là tập con của Machine Learning, sử dụng mạng neuron nhiều tầng để mô phỏng não bộ [D1-P01]. Gene",
+      "ask_again": null
+    },
+    {
+      "id": "GS-02",
+      "difficulty": "thuong",
+      "expected": "IN_CORPUS",
+      "got": "IN_CORPUS",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Turing Test kiểm tra khả năng của máy tính trong việc mô phỏng hành vi của con người. Cụ thể, nếu một người thử nghiệm không thể phân biệt được đâu là máy tính và đâu là người thật từ câu trả lời mà họ nhận được, thì máy tính đó được coi là đã vượt qua bài kiểm tra này [D1-P02].",
+      "ask_again": null
+    },
+    {
+      "id": "GS-03",
+      "difficulty": "thuong",
+      "expected": "IN_CORPUS",
+      "got": "IN_CORPUS",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Symbolic AI và hệ chuyên gia gặp bế tắc do hai lý do chính. Thứ nhất, Symbolic AI sử dụng các luật logic cứng để máy học theo, nhưng giới hạn của nó là không thể liệt kê hết các luật của thế giới thực, dẫn đến bùng nổ tổ hợp. Thứ hai, hệ chuyên gia gặp khó khăn trong việc bảo trì",
+      "ask_again": null
+    },
+    {
+      "id": "GS-04",
+      "difficulty": "thuong",
+      "expected": "IN_CORPUS",
+      "got": "IN_CORPUS",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Transformer khác RNN ở chỗ Transformer sử dụng cơ chế Self-Attention để quan sát toàn bộ câu và tính toán ma trận trọng số tương quan giữa các từ quan trọng, trong khi RNN xử lý tuần tự từng từ và dễ quên ngữ cảnh dài [D1-P06].",
+      "ask_again": null
+    },
+    {
+      "id": "GS-05",
+      "difficulty": "thuong",
+      "expected": "IN_CORPUS",
+      "got": "IN_CORPUS",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Bản chất của LLM (Mô hình ngôn ngữ lớn) là dự đoán token tiếp theo dựa trên chuỗi từ phía trước trong một vòng lặp liên tục, tức là nó hoạt động như một cỗ máy xác suất [D1-P07]. LLM không thực sự hiểu tri thức như con người mà chỉ mô phỏng cấu trúc ngôn ngữ [D1-P07].",
+      "ask_again": null
+    },
+    {
+      "id": "GS-06",
+      "difficulty": "thuong",
+      "expected": "NEED_EXTERNAL",
+      "got": "NEED_EXTERNAL",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Self-Attention giúp mô hình nhìn toàn bộ câu và xác định mối quan hệ giữa các từ, điều này giúp nó hiểu ngữ cảnh tốt hơn so với RNN, vốn chỉ xử lý từng từ một cách tuần tự và dễ quên ngữ cảnh dài. Ví dụ, trong một câu dài, Self-Attention có thể nhận diện được từ nào quan trọng hơ",
+      "ask_again": null
+    },
+    {
+      "id": "GS-07",
+      "difficulty": "thuong",
+      "expected": "NEED_EXTERNAL",
+      "got": "IN_CORPUS",
+      "pass": false,
+      "group": "Sai nguồn",
+      "reasons": [
+        "nhãn IN_CORPUS ≠ NEED_EXTERNAL",
+        "label=NEED_EXTERNAL",
+        "thiếu MOCK-EXT"
+      ],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Trong thực tế triển khai chatbot doanh nghiệp, ngoài việc cắt ngắn context, có thể áp dụng các biện pháp như quản lý context gọn gàng và chất lượng để tránh hiện tượng Context Rot. Việc này giúp mô hình tập trung hơn và duy trì độ chính xác cao hơn khi xử lý thông tin [D1-P10].",
+      "ask_again": null
+    },
+    {
+      "id": "GS-08",
+      "difficulty": "kho",
+      "expected": "NEED_EXTERNAL",
+      "got": "NEED_EXTERNAL",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Theo slide, token tiếng Việt tốn nhiều hơn tiếng Anh do có dấu, với chi phí token gấp 1.3 đến 1.5 lần cho cùng một độ dài câu [D1-P09]. Tuy nhiên, để so sánh với tokenizer của GPT-4, cần tham khảo thêm thông tin từ nguồn ngoài, vì không có dữ liệu cụ thể trong lớp về cách hoạt độ",
+      "ask_again": "Bạn có thể cung cấp thêm thông tin về tokenizer của GPT-4 không?"
+    },
+    {
+      "id": "GS-09",
+      "difficulty": "thuong",
+      "expected": "CANNOT_FETCH",
+      "got": "CANNOT_FETCH",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Xin lỗi, tôi không thể lấy được thông tin từ DOI của bài báo 'Attention Is All You Need' vì môi trường hiện tại đang cấm truy cập web. Bạn có thể thử tìm kiếm thông tin này qua các cơ sở dữ liệu học thuật như Google Scholar, IEEE Xplore hoặc arXiv.",
+      "ask_again": "Bạn có cần thêm thông tin gì khác không?"
+    },
+    {
+      "id": "GS-10",
+      "difficulty": "thuong",
+      "expected": "CANNOT_FETCH",
+      "got": "CANNOT_FETCH",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Không lấy được nguồn ngoài để tìm docs chính thức về tokenizer tiếng Việt. Bạn có thể thử tìm kiếm với các truy vấn sau: 1. 'tokenizer tiếng Việt' 2. 'công cụ tokenizer cho tiếng Việt' 3. 'hướng dẫn sử dụng tokenizer tiếng Việt'.",
+      "ask_again": null
+    },
+    {
+      "id": "GS-11",
+      "difficulty": "kho",
+      "expected": "CANNOT_FETCH",
+      "got": "CANNOT_FETCH",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 2,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Không lấy được nguồn ngoài để tóm tắt paper Smith et al. 2024. Bạn có thể thử tìm hiểu thêm về Self-Attention trong kiến trúc Transformer từ bài báo 'Attention Is All You Need' của Google, hoặc xem các tài liệu khác liên quan đến Self-Attention.",
+      "ask_again": [
+        "Bạn có muốn biết thêm về Self-Attention trong kiến trúc Transformer không?",
+        "Bạn có cần thông tin về các ứng dụng của Self-Attention không?",
+        "Bạn có muốn tìm hiểu về các mô hình khác sử dụng Self-Attention không?"
+      ]
+    },
+    {
+      "id": "GS-12",
+      "difficulty": "thuong",
+      "expected": "ASK_AGAIN",
+      "got": "ASK_AGAIN",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Tôi không có đủ thông tin để giải thích câu hỏi của bạn. Bạn có thể cung cấp thêm chi tiết hoặc làm rõ hơn về điều bạn muốn biết không?",
+      "ask_again": "Bạn có thể cho biết cụ thể bạn muốn giải thích về vấn đề gì không?"
+    },
+    {
+      "id": "GS-13",
+      "difficulty": "kho",
+      "expected": "ASK_AGAIN",
+      "got": "ASK_AGAIN",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Token trong bài này có thể được xem là tương tự như biến ngẫu nhiên trong xác suất thống kê, vì mô hình ngôn ngữ lớn (LLM) dự đoán token tiếp theo dựa trên xác suất của các từ đã có trước đó [D1-P07]. Tuy nhiên, để khẳng định chính xác hơn, cần có thêm thông tin về cách thức hoạt",
+      "ask_again": "Bạn có thể giải thích rõ hơn về cách mà biến ngẫu nhiên hoạt động trong xác suất thống kê không?"
+    },
+    {
+      "id": "GS-14",
+      "difficulty": "thuong",
+      "expected": "OUT_OF_SCOPE",
+      "got": "OUT_OF_SCOPE",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Xin lỗi, tôi không thể giúp bạn viết code cho bài lab 1. Bạn có thể tham khảo tài liệu lớp để tự thực hiện.",
+      "ask_again": null
+    },
+    {
+      "id": "GS-15",
+      "difficulty": "kho",
+      "expected": "OUT_OF_SCOPE",
+      "got": "OUT_OF_SCOPE",
+      "pass": true,
+      "group": null,
+      "reasons": [],
+      "technical_error": null,
+      "retry_count": 0,
+      "ai": "THAT",
+      "mock_parts": [
+        "fetch=MOCK",
+        "retry=MOCK",
+        "corpus=excerpt mã B3-* (không data pack)"
+      ],
+      "answer_excerpt": "Xin lỗi, nhưng tôi không thể giúp bạn soạn báo cáo giữa kỳ môn Kinh tế lượng. Bạn có thể tham khảo các tài liệu trong lớp để viết báo cáo của mình.",
+      "ask_again": null
+    }
+  ],
+  "note": "CP3 số đo gốc. Chưa khóa quality bar (CP4)."
+}

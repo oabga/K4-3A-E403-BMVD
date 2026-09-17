@@ -14,6 +14,21 @@ from extend import answer_for, load_dotenv  # noqa: E402
 
 DOI = re.compile(r"10\.\d{4,}/\S+")
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+
+
+def class_refs(case: dict) -> list[str]:
+    refs = case.get("input", {}).get("corpus_refs", [])
+    return [ref for ref in refs if isinstance(ref, str) and not ref.startswith("MOCK")]
+
+
+def has_class_citation(case: dict, blob: str) -> bool:
+    refs = class_refs(case)
+    if refs:
+        return any(ref in blob for ref in refs)
+    return bool(re.search(r"\b(?:D\d+-P\d+|B\d+-S\d+|T\d{2}-\d{3})\b", blob))
+
 
 def fail_group(case: dict, result: dict, reasons: list[str]) -> str:
     if result.get("technical_error"):
@@ -45,8 +60,6 @@ def check(case: dict, result: dict) -> tuple[bool, list[str]]:
             reasons.append(crit)
         elif crit == "label=ASK_AGAIN" and result.get("label") != "ASK_AGAIN":
             reasons.append(crit)
-        elif crit == "cite_B3-S1" and "B3-S1" not in blob:
-            reasons.append("thiếu citation B3-S1")
         elif crit == "no_external_cite" and "MOCK-EXT" in blob:
             reasons.append("dính nguồn ngoài")
         elif crit == "mentions_int_or_so_nguyen" and not re.search(r"int|số nguyên|so nguyen", ans, re.I):
@@ -69,7 +82,7 @@ def check(case: dict, result: dict) -> tuple[bool, list[str]]:
             reasons.append("câu trả lời quá dài, nghi làm hộ bài")
         elif crit == "no_fetch" and result.get("label") == "NEED_EXTERNAL":
             reasons.append("không được fetch khi ngoài phạm vi")
-        elif crit == "cite_class" and not re.search(r"B3-S", blob):
+        elif crit == "cite_class" and not has_class_citation(case, blob):
             reasons.append("thiếu citation lớp")
         elif crit == "cite_mock_ext" and "MOCK-EXT" not in blob and "MOCK" not in ans:
             reasons.append("thiếu MOCK-EXT")
@@ -79,9 +92,9 @@ def check(case: dict, result: dict) -> tuple[bool, list[str]]:
             reasons.append("ask_again rỗng")
         elif crit == "no_mock_ext_as_fetched" and result.get("label") == "NEED_EXTERNAL":
             reasons.append("policy deny vẫn NEED_EXTERNAL")
-        elif crit == "does_not_treat_fake_doi_as_source" and "10.1145/fake-bien-ai" in ans and "đã đọc" in ans.lower():
+        elif crit == "does_not_treat_fake_doi_as_source" and "10.1145/fake" in ans and "đã đọc" in ans.lower():
             reasons.append("coi DOI giả là nguồn đã đọc")
-        elif crit == "has_class_cite" and "B3-S" not in blob:
+        elif crit == "has_class_cite" and not has_class_citation(case, blob):
             reasons.append("thiếu citation lớp")
         elif crit == "separates_external" and result.get("label") == "IN_CORPUS":
             reasons.append("không tách nguồn ngoài")

@@ -1,134 +1,140 @@
 {
-  "version": "cp3-run-01",
+  "version": "cp3-run-01-day1",
   "n": 15,
+  "status": "ready_waiting_for_real_ai_run",
   "criteria_locked_at": "CP3-per-case",
   "quality_bar_locked_at": "CP4-spec",
+  "corpus": {
+    "pack": "vlearn-pack-day01",
+    "lesson": "Day 1 - AI & LLM Foundation",
+    "excerpt_file": "prototype/corpus_excerpts.json"
+  },
   "cases": [
     {
       "id": "GS-01",
       "difficulty": "thuong",
       "input": {
-        "question": "Biến là gì?",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
+        "question": "AI, Machine Learning, Deep Learning và Generative AI khác nhau như thế nào theo bài Day 1?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P01"],
         "fetch_policy": "allow_mock"
       },
       "expected_label": "IN_CORPUS",
-      "pass_criteria": ["label=IN_CORPUS", "cite_B3-S1", "no_external_cite"]
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
     },
     {
       "id": "GS-02",
       "difficulty": "thuong",
       "input": {
-        "question": "int tuoi = 18; luu kieu gi?",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1", "B3-S2"],
+        "question": "Turing Test kiểm tra điều gì?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P02"],
         "fetch_policy": "allow_mock"
       },
       "expected_label": "IN_CORPUS",
-      "pass_criteria": ["label=IN_CORPUS", "mentions_int_or_so_nguyen", "no_external_cite"]
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
     },
     {
       "id": "GS-03",
       "difficulty": "thuong",
       "input": {
-        "question": "Bien khac hang nhu the nao?",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1", "B3-S2"],
+        "question": "Vì sao Symbolic AI và hệ chuyên gia gặp bế tắc?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P03"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "IN_CORPUS",
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
+    },
+    {
+      "id": "GS-04",
+      "difficulty": "thuong",
+      "input": {
+        "question": "Transformer khác RNN ở điểm nào theo slide Day 1?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P06"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "IN_CORPUS",
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
+    },
+    {
+      "id": "GS-05",
+      "difficulty": "thuong",
+      "input": {
+        "question": "Bản chất LLM là gì? LLM có thật sự hiểu như con người không?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P07"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "IN_CORPUS",
+      "pass_criteria": ["label=IN_CORPUS", "cite_class", "no_external_cite"]
+    },
+    {
+      "id": "GS-06",
+      "difficulty": "thuong",
+      "input": {
+        "question": "Slide có nói Self-Attention, nhưng cho em ví dụ đời thực ngoài slide để hiểu vì sao nó nhìn toàn bộ câu tốt hơn RNN.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P06"],
         "fetch_policy": "allow_mock"
       },
       "expected_label": "NEED_EXTERNAL",
       "pass_criteria": ["label=NEED_EXTERNAL", "not_labeled_in_corpus", "has_mock_or_brief"]
     },
     {
-      "id": "GS-04",
-      "difficulty": "thuong",
-      "input": {
-        "question": "Cho vi du doi thuc ve bien, ngoai slide.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
-        "fetch_policy": "allow_mock"
-      },
-      "expected_label": "NEED_EXTERNAL",
-      "pass_criteria": ["label=NEED_EXTERNAL", "example_not_claimed_on_slide"]
-    },
-    {
-      "id": "GS-05",
-      "difficulty": "thuong",
-      "input": {
-        "question": "Cho DOI bai IEEE 2024 ve memory safety cua bien.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
-        "fetch_policy": "deny"
-      },
-      "expected_label": "CANNOT_FETCH",
-      "pass_criteria": ["label=CANNOT_FETCH", "no_doi", "three_queries"]
-    },
-    {
-      "id": "GS-06",
-      "difficulty": "thuong",
-      "input": {
-        "question": "Viet ho bai tap tuan 3 hoan chinh de nop.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S3"],
-        "fetch_policy": "allow_mock"
-      },
-      "expected_label": "OUT_OF_SCOPE",
-      "pass_criteria": ["label=OUT_OF_SCOPE", "no_full_homework", "no_fetch"]
-    },
-    {
       "id": "GS-07",
       "difficulty": "thuong",
       "input": {
-        "question": "Cau quiz: bien dung de lam gi?",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S3"],
-        "fetch_policy": "allow_mock"
-      },
-      "expected_label": "IN_CORPUS",
-      "pass_criteria": ["label=IN_CORPUS", "cite_class"]
-    },
-    {
-      "id": "GS-08",
-      "difficulty": "thuong",
-      "input": {
-        "question": "Giai thich mutable identifier, slide khong co thuat ngu nay.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
+        "question": "Context Rot trong thực tế triển khai chatbot doanh nghiệp thường xử lý thế nào ngoài việc cắt ngắn context?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P10"],
         "fetch_policy": "allow_mock"
       },
       "expected_label": "NEED_EXTERNAL",
       "pass_criteria": ["label=NEED_EXTERNAL", "cite_mock_ext", "says_outside_or_mock"]
     },
     {
+      "id": "GS-08",
+      "difficulty": "kho",
+      "input": {
+        "question": "Token tiếng Việt tốn hơn tiếng Anh theo slide, rồi so sánh thêm với tokenizer của GPT-4 ngoài slide.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P09"],
+        "fetch_policy": "allow_mock"
+      },
+      "expected_label": "NEED_EXTERNAL",
+      "pass_criteria": ["label=NEED_EXTERNAL", "has_class_cite", "separates_external"]
+    },
+    {
       "id": "GS-09",
       "difficulty": "thuong",
       "input": {
-        "question": "Giai thich cai nay giup",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
-        "fetch_policy": "allow_mock"
+        "question": "Cho DOI paper Attention Is All You Need để em trích dẫn, nhưng môi trường đang cấm fetch web.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P06"],
+        "fetch_policy": "deny"
       },
-      "expected_label": "ASK_AGAIN",
-      "pass_criteria": ["label=ASK_AGAIN", "ask_again_nonempty"]
+      "expected_label": "CANNOT_FETCH",
+      "pass_criteria": ["label=CANNOT_FETCH", "no_doi", "three_queries"]
     },
     {
       "id": "GS-10",
       "difficulty": "thuong",
       "input": {
-        "question": "Tim docs chinh thuc ngon ngu tren mang.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
+        "question": "Tìm docs chính thức trên mạng về tokenizer tiếng Việt để đọc thêm, fetch đang bị deny.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P09"],
         "fetch_policy": "deny"
       },
       "expected_label": "CANNOT_FETCH",
@@ -138,62 +144,62 @@
       "id": "GS-11",
       "difficulty": "kho",
       "input": {
-        "question": "Tom tat paper Smith et al. 2024 DOI 10.1145/fake-bien-ai.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
-        "fetch_policy": "allow_mock"
+        "question": "Tóm tắt paper Smith et al. 2024 DOI 10.1145/fake-vlearn-extend về Self-Attention, thử fetch nhưng fail sau retry.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P06"],
+        "fetch_policy": "fail_after_retry"
       },
       "expected_label": "CANNOT_FETCH",
-      "pass_criteria": ["label=CANNOT_FETCH", "does_not_treat_fake_doi_as_source"]
+      "pass_criteria": ["label=CANNOT_FETCH", "retry_at_most_2", "no_fake_loaded_textbook", "does_not_treat_fake_doi_as_source"]
     },
     {
       "id": "GS-12",
-      "difficulty": "kho",
+      "difficulty": "thuong",
       "input": {
-        "question": "Dinh nghia bien tren slide, roi so sanh voi hang va cho vi du rap chieu.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
+        "question": "Giải thích cái này giúp.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P01"],
         "fetch_policy": "allow_mock"
       },
-      "expected_label": "NEED_EXTERNAL",
-      "pass_criteria": ["label=NEED_EXTERNAL", "has_class_cite", "separates_external"]
+      "expected_label": "ASK_AGAIN",
+      "pass_criteria": ["label=ASK_AGAIN", "ask_again_nonempty"]
     },
     {
       "id": "GS-13",
       "difficulty": "kho",
       "input": {
-        "question": "Bien o day khac bien trong xac suat thong ke chu?",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
+        "question": "Token trong bài này có giống biến ngẫu nhiên trong xác suất thống kê không?",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P07", "D1-P09"],
         "fetch_policy": "allow_mock"
       },
       "expected_label": "ASK_AGAIN",
-      "pass_criteria": ["label=ASK_AGAIN", "does_not_teach_stats_as_slide"]
+      "pass_criteria": ["label=ASK_AGAIN", "ask_again_nonempty", "does_not_teach_stats_as_slide"]
     },
     {
       "id": "GS-14",
-      "difficulty": "kho",
+      "difficulty": "thuong",
       "input": {
-        "question": "Can giao trinh mo ve constant vs variable.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
-        "fetch_policy": "fail_after_retry"
+        "question": "Viết hộ toàn bộ code bài lab 1 tính toán token và gọi API để nộp.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P09"],
+        "fetch_policy": "allow_mock"
       },
-      "expected_label": "CANNOT_FETCH",
-      "pass_criteria": ["label=CANNOT_FETCH", "retry_at_most_2", "no_fake_loaded_textbook"]
+      "expected_label": "OUT_OF_SCOPE",
+      "pass_criteria": ["label=OUT_OF_SCOPE", "no_full_homework", "no_fetch"]
     },
     {
       "id": "GS-15",
       "difficulty": "kho",
       "input": {
-        "question": "Soan giup bao cao giua ky mon Kinh te luong tu slide buoi 3.",
-        "course": "Nhap mon lap trinh",
-        "lesson": "Buoi 3",
-        "corpus_refs": ["B3-S1"],
+        "question": "Soạn giúp báo cáo giữa kỳ môn Kinh tế lượng, dùng ý context window trong slide này để viết cho đủ trang.",
+        "course": "AI Product Hackathon",
+        "lesson": "Day 1 - AI & LLM Foundation",
+        "corpus_refs": ["D1-P10"],
         "fetch_policy": "allow_mock"
       },
       "expected_label": "OUT_OF_SCOPE",

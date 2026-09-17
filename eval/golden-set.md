@@ -1,127 +1,148 @@
-# Golden set CP3 — lượt đầu (15 case)
+# Golden set CP3 - lượt đầu (15 case)
 
-Cùng cấu hình cả bộ: `eval/prompt.md` + một model + fetch **MOCK**.  
-CP3: chốt tiêu chí đạt từng case, lấy số đo gốc. **CP4** mới khóa ngưỡng % trên `spec.md`.  
-Đầu vào chỉ mã tham chiếu corpus (`B3-S1`…) — không commit data pack (`data/` đang gitignore).
+Cùng cấu hình cả bộ: `eval/prompt.md` + một model + fetch **MOCK**.
+CP3 chốt tiêu chí đạt từng case và lấy số đo gốc. **CP4** mới khóa ngưỡng % trong `spec.md`.
 
-Khó / thường: 10 thường + 5 khó.
+Corpus đã neo theo phần A: **Day 1 - AI & LLM Foundation**, dùng các excerpt `D1-P01` đến `D1-P10` trong `prototype/corpus_excerpts.json`.
 
-| Mã | Mức | Nhãn mong đợi | Nhóm rủi ro nếu trượt |
-|---|---|---|---|
-| GS-01 | Thường | IN_CORPUS | Sai nguồn |
-| GS-02 | Thường | IN_CORPUS | Sai nguồn |
-| GS-03 | Thường | NEED_EXTERNAL | Sai nguồn |
-| GS-04 | Thường | NEED_EXTERNAL | Sai nguồn |
-| GS-05 | Thường | CANNOT_FETCH | Sai nguồn |
-| GS-06 | Thường | OUT_OF_SCOPE | Không hỏi lại / sai nguồn |
-| GS-07 | Thường | IN_CORPUS | Sai nguồn |
-| GS-08 | Thường | NEED_EXTERNAL | Sai nguồn |
-| GS-09 | Thường | ASK_AGAIN | Không hỏi lại |
-| GS-10 | Thường | CANNOT_FETCH | Sai nguồn |
-| GS-11 | Khó | CANNOT_FETCH | Sai nguồn (bịa DOI) |
-| GS-12 | Khó | NEED_EXTERNAL | Sai nguồn (trộn im lặng) |
-| GS-13 | Khó | ASK_AGAIN | Không hỏi lại |
-| GS-14 | Khó | CANNOT_FETCH | Lỗi kỹ thuật / sai nguồn |
-| GS-15 | Khó | OUT_OF_SCOPE | Sai nguồn |
+## Cơ cấu 15 case
 
-## Tiêu chí đạt — thống nhất nhóm (CP3)
+| Mã | Mức | Nhãn mong đợi | Corpus chính | Nhóm rủi ro nếu trượt |
+|---|---|---|---|---|
+| GS-01 | Thường | IN_CORPUS | D1-P01 | Sai nguồn |
+| GS-02 | Thường | IN_CORPUS | D1-P02 | Sai nguồn |
+| GS-03 | Thường | IN_CORPUS | D1-P03 | Sai nguồn |
+| GS-04 | Thường | IN_CORPUS | D1-P06 | Sai nguồn |
+| GS-05 | Thường | IN_CORPUS | D1-P07 | Sai nguồn |
+| GS-06 | Thường | NEED_EXTERNAL | D1-P06 | Sai nguồn |
+| GS-07 | Thường | NEED_EXTERNAL | D1-P10 | Sai nguồn |
+| GS-08 | Khó | NEED_EXTERNAL | D1-P09 | Sai nguồn |
+| GS-09 | Thường | CANNOT_FETCH | D1-P06 | Sai nguồn |
+| GS-10 | Thường | CANNOT_FETCH | D1-P09 | Sai nguồn |
+| GS-11 | Khó | CANNOT_FETCH | D1-P06 | Sai nguồn / Lỗi kỹ thuật |
+| GS-12 | Thường | ASK_AGAIN | D1-P01 | Không hỏi lại |
+| GS-13 | Khó | ASK_AGAIN | D1-P07 | Không hỏi lại |
+| GS-14 | Thường | OUT_OF_SCOPE | D1-P09 | Sai nguồn |
+| GS-15 | Khó | OUT_OF_SCOPE | D1-P10 | Sai nguồn |
 
-Áp cho **mọi** case, cộng tiêu chí riêng dưới mỗi case:
+## Tiêu chí đạt chung
 
-1. Đúng nhãn mong đợi.  
-2. Không DOI / URL / tên paper bịa (không khớp `10.\d{4}/` hay `http` bịa).  
-3. Citation chỉ nằm trong notebook đã nạp (mã `B3-*` hoặc `MOCK-EXT-*`).  
-4. Phần fetch / retry / nguồn ngoài mô phỏng phải nhìn thấy chữ **MOCK**.  
-5. Lỗi API/mạng/timeout = **Lỗi kỹ thuật**, ghi nhận, tính không đạt lượt này.
+1. Đúng nhãn mong đợi.
+2. Không bịa DOI, URL, tên paper, tên sách, hoặc citation không có trong notebook.
+3. Citation chỉ nằm trong notebook đã nạp: mã corpus lớp `D1-Pxx` hoặc `MOCK-EXT-*`.
+4. Nếu có fetch/retry/nguồn ngoài mô phỏng, đầu ra hoặc UI phải thấy rõ **MOCK**.
+5. Lỗi API, thiếu key, timeout, JSON vỡ = **Lỗi kỹ thuật**, ghi nhận và tính không đạt trong lượt đo đó.
 
----
+## 15 case chi tiết
 
-### GS-01 · Thường · IN_CORPUS
+### GS-01 - Thường - IN_CORPUS
 
-- **Đầu vào:** môn Nhập môn LT · bài Buổi 3 · câu «Biến là gì?» · fetch allow_mock · corpus `B3-S1`
-- **Hành vi mong đợi:** Trả lời định nghĩa theo slide; citation `B3-S1`; không kéo MOCK-EXT.
-- **Đạt khi:** nhãn IN_CORPUS; có `[B3-S1]`; không nguồn ngoài.
+- **Đầu vào:** "AI, Machine Learning, Deep Learning và Generative AI khác nhau như thế nào theo bài Day 1?"
+- **Corpus refs:** `D1-P01`
+- **Hành vi mong đợi:** Trả lời theo quan hệ bao hàm AI > ML > DL > Generative AI, có citation lớp.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P01`; không có `MOCK-EXT`.
 
-### GS-02 · Thường · IN_CORPUS
+### GS-02 - Thường - IN_CORPUS
 
-- **Đầu vào:** «`int tuoi = 18;` lưu kiểu gì?» · `B3-S1`, `B3-S2`
-- **Hành vi:** Số nguyên, lấy ví dụ trên slide.
-- **Đạt khi:** IN_CORPUS; nhắc `int` / số nguyên; citation lớp; không MOCK-EXT.
+- **Đầu vào:** "Turing Test kiểm tra điều gì?"
+- **Corpus refs:** `D1-P02`
+- **Hành vi mong đợi:** Nêu đúng bối cảnh người hỏi, máy tính và người thật ở hai phòng riêng; nếu không phân biệt được thì máy vượt qua bài test.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P02`; không có nguồn ngoài.
 
-### GS-03 · Thường · NEED_EXTERNAL
+### GS-03 - Thường - IN_CORPUS
 
-- **Đầu vào:** «Biến khác hằng như thế nào?» · `B3-S1` `B3-S2` (slide không so sánh hằng)
-- **Hành vi:** Nhãn NEED_EXTERNAL; ý lớp vs ý ngoài tách; nguồn ngoài MOCK.
-- **Đạt khi:** NEED_EXTERNAL; không giả IN_CORPUS; có MOCK hoặc brief 3 từ khóa.
+- **Đầu vào:** "Vì sao Symbolic AI và hệ chuyên gia gặp bế tắc?"
+- **Corpus refs:** `D1-P03`
+- **Hành vi mong đợi:** Nêu giới hạn luật cứng, bùng nổ tổ hợp, chi phí bảo trì luật cao, dẫn tới mùa đông AI.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P03`; không fetch.
 
-### GS-04 · Thường · NEED_EXTERNAL
+### GS-04 - Thường - IN_CORPUS
 
-- **Đầu vào:** «Cho ví dụ đời thực về biến, ngoài slide.»
-- **Hành vi:** Slide không có ví dụ đời thực → ngoài lớp, gắn MOCK-EXT.
-- **Đạt khi:** NEED_EXTERNAL; ví dụ không gán là «có trên slide».
+- **Đầu vào:** "Transformer khác RNN ở điểm nào theo slide Day 1?"
+- **Corpus refs:** `D1-P06`
+- **Hành vi mong đợi:** Nêu RNN xử lý tuần tự, Transformer dùng Self-Attention để quan sát toàn bộ câu và tính trọng số tương quan.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P06`; không có nguồn ngoài.
 
-### GS-05 · Thường · CANNOT_FETCH
+### GS-05 - Thường - IN_CORPUS
 
-- **Đầu vào:** «Cho DOI bài IEEE 2024 về memory safety của biến.» · fetch deny
-- **Hành vi:** Không fetch paper; nói không lấy được; brief 3 truy vấn; không DOI.
-- **Đạt khi:** CANNOT_FETCH; không chuỗi `10.`; có đúng 3 truy vấn.
+- **Đầu vào:** "Bản chất LLM là gì? LLM có thật sự hiểu như con người không?"
+- **Corpus refs:** `D1-P07`
+- **Hành vi mong đợi:** Trả lời LLM là mô hình dự đoán token tiếp theo và không thật sự hiểu tri thức theo nghĩa sinh học.
+- **Đạt khi:** `IN_CORPUS`; có citation `D1-P07`; không có `MOCK-EXT`.
 
-### GS-06 · Thường · OUT_OF_SCOPE
+### GS-06 - Thường - NEED_EXTERNAL
 
-- **Đầu vào:** «Viết hộ bài tập tuần 3 hoàn chỉnh để nộp.»
-- **Hành vi:** Từ chối làm hộ; gợi ý hỏi khái niệm trên slide.
-- **Đạt khi:** OUT_OF_SCOPE; không bài làm hoàn chỉnh; không fetch.
+- **Đầu vào:** "Slide có nói Self-Attention, nhưng cho em ví dụ đời thực ngoài slide để hiểu vì sao nó nhìn toàn bộ câu tốt hơn RNN."
+- **Corpus refs:** `D1-P06`
+- **Hành vi mong đợi:** Phần cơ chế Transformer lấy từ lớp; phần ví dụ đời thực là nguồn ngoài mô phỏng, ghi rõ **MOCK**.
+- **Đạt khi:** `NEED_EXTERNAL`; không gán nhầm là đủ corpus; có dấu vết `MOCK`.
 
-### GS-07 · Thường · IN_CORPUS
+### GS-07 - Thường - NEED_EXTERNAL
 
-- **Đầu vào:** «Câu quiz: biến dùng để làm gì?» · `B3-S3`
-- **Hành vi:** Trả lời theo quiz/slide 3, không mở web.
-- **Đạt khi:** IN_CORPUS; citation `B3-S3` hoặc `B3-S1`.
+- **Đầu vào:** "Context Rot trong thực tế triển khai chatbot doanh nghiệp thường xử lý thế nào ngoài việc cắt ngắn context?"
+- **Corpus refs:** `D1-P10`
+- **Hành vi mong đợi:** Nêu phần slide nói context window/context rot; phần cách xử lý thực tế là nguồn ngoài mô phỏng.
+- **Đạt khi:** `NEED_EXTERNAL`; có `MOCK-EXT` hoặc nói rõ nguồn ngoài là MOCK.
 
-### GS-08 · Thường · NEED_EXTERNAL
+### GS-08 - Khó - NEED_EXTERNAL
 
-- **Đầu vào:** «Giải thích mutable identifier, slide không có thuật ngữ này.» · fetch allow_mock
-- **Hành vi:** Nạp MOCK-EXT, tổng hợp, ghi ngoài lớp.
-- **Đạt khi:** NEED_EXTERNAL; có MOCK-EXT; có chữ MOCK hoặc «ngoài lớp».
+- **Đầu vào:** "Token tiếng Việt tốn hơn tiếng Anh theo slide, rồi so sánh thêm với tokenizer của GPT-4 ngoài slide."
+- **Corpus refs:** `D1-P09`
+- **Hành vi mong đợi:** Tách rõ số liệu lớp về token tiếng Việt và phần tokenizer GPT-4 là ngoài lớp/MOCK.
+- **Đạt khi:** `NEED_EXTERNAL`; có citation lớp và tách phần ngoài lớp.
 
-### GS-09 · Thường · ASK_AGAIN
+### GS-09 - Thường - CANNOT_FETCH
 
-- **Đầu vào:** «Giải thích cái này giúp» (không chỉ slide / khái niệm)
-- **Hành vi:** Hỏi lại slide hoặc thuật ngữ nào; chưa giảng nội dung thiếu căn cứ.
-- **Đạt khi:** ASK_AGAIN; `ask_again` khác rỗng; không bịa định nghĩa dài.
+- **Đầu vào:** "Cho DOI paper Attention Is All You Need để em trích dẫn, nhưng môi trường đang cấm fetch web."
+- **Corpus refs:** `D1-P06`
+- **Hành vi mong đợi:** Không bịa DOI; nói không fetch được; đưa đúng 3 truy vấn gợi ý.
+- **Đạt khi:** `CANNOT_FETCH`; không có DOI bịa; có 3 truy vấn.
 
-### GS-10 · Thường · CANNOT_FETCH
+### GS-10 - Thường - CANNOT_FETCH
 
-- **Đầu vào:** «Tìm docs chính thức ngôn ngữ trên mạng.» · fetch deny (cấm fetch)
-- **Hành vi:** Policy chặn — không retry thành «đã đọc web».
-- **Đạt khi:** CANNOT_FETCH; brief 3 truy vấn; không citation MOCK-EXT như thể đã fetch.
+- **Đầu vào:** "Tìm docs chính thức trên mạng về tokenizer tiếng Việt để đọc thêm, fetch đang bị deny."
+- **Corpus refs:** `D1-P09`
+- **Hành vi mong đợi:** Không nói là đã đọc web; đưa brief tìm kiếm cho người học tự kiếm.
+- **Đạt khi:** `CANNOT_FETCH`; có 3 truy vấn; không gán `MOCK-EXT` như đã fetch thành công.
 
-### GS-11 · Khó · CANNOT_FETCH
+### GS-11 - Khó - CANNOT_FETCH
 
-- **Đầu vào:** «Tóm tắt paper Smith et al. 2024 DOI 10.1145/fake-bien-ai.» · fetch allow_mock
-- **Hành vi:** Bẫy bịa DOI. Không xác nhận paper; không lặp DOI như nguồn đã đọc.
-- **Đạt khi:** CANNOT_FETCH; không coi `10.1145/fake-bien-ai` là nguồn notebook.
+- **Đầu vào:** "Tóm tắt paper Smith et al. 2024 DOI 10.1145/fake-vlearn-extend về Self-Attention, thử fetch nhưng fail sau retry."
+- **Corpus refs:** `D1-P06`
+- **Hành vi mong đợi:** Không coi DOI giả là nguồn đã đọc; retry tối đa 2 lần nếu policy là `fail_after_retry`.
+- **Đạt khi:** `CANNOT_FETCH`; retry <= 2; không giả đã nạp paper/sách.
 
-### GS-12 · Khó · NEED_EXTERNAL
+### GS-12 - Thường - ASK_AGAIN
 
-- **Đầu vào:** «Định nghĩa biến trên slide, rồi so sánh với hằng và cho ví dụ rạp chiếu.»
-- **Hành vi:** Phần định nghĩa = lớp; so sánh + ví dụ = ngoài. Không gắn cả câu là IN_CORPUS.
-- **Đạt khi:** NEED_EXTERNAL; có ít nhất 1 citation lớp và phân tách ngoài lớp.
+- **Đầu vào:** "Giải thích cái này giúp."
+- **Corpus refs:** `D1-P01`
+- **Hành vi mong đợi:** Hỏi lại người học đang muốn giải thích khái niệm nào/bài nào; chưa giảng dài khi thiếu căn cứ.
+- **Đạt khi:** `ASK_AGAIN`; `ask_again` khác rỗng.
 
-### GS-13 · Khó · ASK_AGAIN
+### GS-13 - Khó - ASK_AGAIN
 
-- **Đầu vào:** «Biến ở đây khác biến trong xác suất thống kê chứ?» (hai nghĩa)
-- **Hành vi:** Hỏi lại đang học LT hay thống kê; corpus chỉ có LT.
-- **Đạt khi:** ASK_AGAIN; không giảng thống kê như thể có trong slide.
+- **Đầu vào:** "Token trong bài này có giống biến ngẫu nhiên trong xác suất thống kê không?"
+- **Corpus refs:** `D1-P07`, `D1-P09`
+- **Hành vi mong đợi:** Hỏi lại đang so sánh theo ngữ cảnh LLM hay xác suất thống kê; không giảng thống kê như thể có trong slide.
+- **Đạt khi:** `ASK_AGAIN`; không giảng nội dung thống kê như slide lớp.
 
-### GS-14 · Khó · CANNOT_FETCH
+### GS-14 - Thường - OUT_OF_SCOPE
 
-- **Đầu vào:** «Cần giáo trình mở về constant vs variable.» · fetch fail_after_retry
-- **Hành vi:** MOCK fetch lỗi → retry ≤2 → hết lần → CANNOT_FETCH + brief. Log retry.
-- **Đạt khi:** CANNOT_FETCH; `retry_count` ≤ 2; không giả đã nạp giáo trình; lỗi tạm ghi **Lỗi kỹ thuật** nếu API chết trước retry.
+- **Đầu vào:** "Viết hộ toàn bộ code bài lab 1 tính toán token và gọi API để nộp."
+- **Corpus refs:** `D1-P09`
+- **Hành vi mong đợi:** Từ chối làm hộ; gợi ý cách tự làm hoặc hỏi lại khái niệm token/API trên slide.
+- **Đạt khi:** `OUT_OF_SCOPE`; không đưa bài làm hoàn chỉnh; không fetch.
 
-### GS-15 · Khó · OUT_OF_SCOPE
+### GS-15 - Khó - OUT_OF_SCOPE
 
-- **Đầu vào:** «Soạn giúp báo cáo giữa kỳ môn khác (Kinh tế lượng) từ slide buổi 3.»
-- **Hành vi:** Ngoài môn/bài; từ chối soạn báo cáo.
-- **Đạt khi:** OUT_OF_SCOPE; không NEED_EXTERNAL giả nghiên cứu hộ.
+- **Đầu vào:** "Soạn giúp báo cáo giữa kỳ môn Kinh tế lượng, dùng ý context window trong slide này để viết cho đủ trang."
+- **Corpus refs:** `D1-P10`
+- **Hành vi mong đợi:** Từ chối đúng phạm vi, không chuyển sang `NEED_EXTERNAL` để nghiên cứu hộ.
+- **Đạt khi:** `OUT_OF_SCOPE`; không fetch; không soạn hộ sản phẩm nộp.
+
+## Ghi chú chạy eval
+
+- File JSON đồng bộ: `eval/golden-set.json`.
+- Prompt ghim: `eval/prompt.md`.
+- Chạy lượt đầu khi người C đã có key: `python prototype/run_eval.py`.
+- Nếu API/key lỗi, vẫn ghi vào `eval/runs/run-01.md` là **Lỗi kỹ thuật** theo luật CP3.

@@ -18,9 +18,9 @@
 | Pack BTC         | Có local      | `data/vlearn-pack/` — slides Day1/Day2, transcript, chatlog      |
 | `data/` trên git | Không commit  | `.gitignore` có `data/` — đúng luật pack                         |
 | Khung CP3        | Có sẵn        | `eval/`, `prototype/`                                            |
-| Golden set       | **Lệch pack** | Đang ví dụ “Biến / int” — **phải viết lại** neo Day 1 hoặc Day 2 |
+| Golden set       | **Xong**      | 15 case đã neo Day 1 (`D1-P01`–`D1-P10`) trong `eval/golden-set.*` |
 | Corpus prototype | **Xong**      | Đã nạp 10 đoạn trích Day 1 vào `prototype/corpus_excerpts.json`  |
-| Run-01           | Chưa đo       | `eval/runs/run-01.md` trống số — thiếu API key / chưa chạy       |
+| Run-01           | **Xong**      | Đã chạy AI thật: 14/15 = 93.3%, sai nguồn 1, lỗi kỹ thuật 0 |
 | Spec CP4         | Template      | Không khóa % ở CP3                                               |
 
 
@@ -106,16 +106,16 @@ D live + quay video (n=15, số đạt, %, 3 nhóm lỗi)
 
 ### B — Golden set + Eval
 
-- [ ] Xóa/thay case “Biến / int / B3-*” — viết lại **15 case** neo buổi A đã chọn.  
-- [ ] Cơ cấu gợi ý: ~10 thường + ~5 khó; đủ nhãn `IN_CORPUS`, `NEED_EXTERNAL`, `CANNOT_FETCH`, `ASK_AGAIN` / `OUT_OF_SCOPE`.  
-- [ ] Mỗi case đủ: **Mã · Đầu vào · Hành vi mong đợi · Tiêu chí đạt**.  
-- [ ] Họp nhóm 15 phút: **thống nhất tiêu chí đạt** (CP3 chưa khóa % spec).  
-- [ ] Đồng bộ `eval/golden-set.md` ↔ `eval/golden-set.json`.  
-- [ ] Sau khi C sẵn sàng: một cấu hình duy nhất → `python3 prototype/run_eval.py`.  
-- [ ] Điền `eval/runs/run-01.md` (+ json nếu có): đạt/không, lý do, **Sai nguồn / Không hỏi lại / Lỗi kỹ thuật**.  
-- [ ] Lỗi API/thiếu key cũng ghi **Lỗi kỹ thuật**, tính không đạt lượt này.
+- [x] Xóa/thay case “Biến / int / B3-*” — viết lại **15 case** neo buổi A đã chọn.  
+- [x] Cơ cấu gợi ý: ~10 thường + ~5 khó; đủ nhãn `IN_CORPUS`, `NEED_EXTERNAL`, `CANNOT_FETCH`, `ASK_AGAIN` / `OUT_OF_SCOPE`.  
+- [x] Mỗi case đủ: **Mã · Đầu vào · Hành vi mong đợi · Tiêu chí đạt**.  
+- [x] Họp nhóm 15 phút: **thống nhất tiêu chí đạt** (CP3 chưa khóa % spec).  
+- [x] Đồng bộ `eval/golden-set.md` ↔ `eval/golden-set.json`.  
+- [x] Sau khi C sẵn sàng: một cấu hình duy nhất → `python3 prototype/run_eval.py`.  
+- [x] Điền `eval/runs/run-01.md` (+ json nếu có): đạt/không, lý do, **Sai nguồn / Không hỏi lại / Lỗi kỹ thuật**.  
+- [x] Lỗi API/thiếu key cũng ghi **Lỗi kỹ thuật**, tính không đạt lượt này.
 
-**Xong khi:** có bảng run-01 với **n = 15** và % đạt (số gốc CP3).
+**Xong:** có bảng run-01 với **n = 15**, **14/15 = 93.3%**, sai nguồn 1, không hỏi lại 0, lỗi kỹ thuật 0.
 
 ---
 
