@@ -4,7 +4,7 @@
 
 | Ghế | Vai | Tên |
 |---|---|---|
-| A | Evidence + corpus | |
-| B | Golden set + Eval | |
-| C | AI thật + Prototype | |
-| D | Bằng chứng (live + video) | |
+| A | Evidence + corpus | Khải Vũ |
+| B | Golden set + Eval | Thân Tiến Đạt |
+| C | AI thật + Prototype | Bảo |
+| D | Bằng chứng (live + video) | Minh |
