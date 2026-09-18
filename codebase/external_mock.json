@@ -65,7 +65,19 @@
       "id": "MOCK-EXT-11",
       "site": "history.turing.mock",
       "title": "[MOCK] Lịch sử / tiểu sử Alan Turing (ngoài slide)",
-      "text": "Nguồn MOCK ngoài lớp dành riêng cho hỏi mở rộng về Alan Turing: ông đề xuất Turing Test năm 1950; bài báo Computing Machinery and Intelligence. Slide Day 1 chỉ nói Turing Test — phần tiểu sử/lịch sử nhân vật lấy từ nguồn MOCK này, không phải Self-Attention hay AlphaGo."
+      "text": "Nguồn MOCK ngoài lớp dành riêng cho hỏi mở rộng về Alan Turing: ông đề xuất Turing Test năm 1950; bài báo Computing Machinery and Intelligence. Slide Day 1 chỉ nói Turing Test — phần tiểu sử/lịch sử nhân vật lấy từ nguồn MOCK này."
+    },
+    {
+      "id": "MOCK-EXT-12",
+      "site": "britannica.mock",
+      "title": "[MOCK] Dòng thời gian Alan Turing — các mốc chính",
+      "text": "Nguồn MOCK ngoài lớp: 1912 sinh tại London; 1936 máy Turing / decidability; Thế chiến II làm việc tại Bletchley Park (ngữ cảnh AI: tư duy máy tính); 1950 bài báo đề xuất Turing Test. Đây là timeline mở rộng, không có đủ trên slide Day 1."
+    },
+    {
+      "id": "MOCK-EXT-13",
+      "site": "ai-history.mock",
+      "title": "[MOCK] Turing Test trong lịch sử AI — vì sao quan trọng",
+      "text": "Nguồn MOCK ngoài lớp: Turing Test đặt câu hỏi 'máy có thể nghĩ?' — nền tảng triết lý cho AI. Slide Day 1 nêu cơ chế hai phòng; nguồn này mở rộng ý nghĩa lịch sử trong ngành AI, không thay định nghĩa trên slide."
     }
   ]
 }

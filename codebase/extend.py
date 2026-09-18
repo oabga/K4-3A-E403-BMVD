@@ -171,6 +171,8 @@ def rank_mock_sources(question: str, sources: list[dict]) -> list[dict]:
         # Neo đúng nguồn theo chủ đề hỏi (điểm cao)
         topic_rules = (
             (r"turing|alan", "MOCK-EXT-11", 25),
+            (r"turing|alan", "MOCK-EXT-12", 22),
+            (r"turing|alan", "MOCK-EXT-13", 20),
             (r"lich su (cua )?(llm|gpt)|llm ra doi|nguoi tao.*llm|ai tao.*llm", "MOCK-EXT-09", 22),
             (r"vaswani|nguoi tao.*transformer|phat minh.*transformer|cong bo.*transformer", "MOCK-EXT-10", 22),
             (r"fei-?fei|imagenet", "MOCK-EXT-07", 18),
@@ -186,7 +188,7 @@ def rank_mock_sources(question: str, sources: list[dict]) -> list[dict]:
             if re.search(pat, q) and s["id"] == sid:
                 score += boost
 
-        # Đang hỏi Turing mà nguồn không nhắc Turing → hạ mạnh (tránh Self-Attention / hallucination)
+        # Đang hỏi Turing mà nguồn không nhắc Turing → hạ mạnh
         if re.search(r"turing|alan", q) and not re.search(r"turing|alan", blob):
             score -= 12
         if re.search(r"\bllm\b", q) and re.search(r"lich su|nguoi tao|ra doi", q):
@@ -201,11 +203,11 @@ def rank_mock_sources(question: str, sources: list[dict]) -> list[dict]:
     if not scored:
         return []
     best = scored[0]["score"]
-    # Chỉ giữ nguồn thực sự liên quan (không đổ cả 11 cái lạc đề)
+    # Giữ vài nguồn đúng chủ đề (kiểu NotebookLM), không đổ cả pack lạc đề
     if best >= 10:
-        kept = [s for s in scored if s["score"] >= max(4, best * 0.35)]
-        return kept[:5]
-    return [s for s in scored if s["score"] > 0][:5]
+        kept = [s for s in scored if s["score"] >= max(3, best * 0.25)]
+        return kept[:6]
+    return [s for s in scored if s["score"] > 0][:6]
 
 
 def retrieve(question: str, excerpts: list[dict], corpus_refs: list[str] | None = None) -> list[dict]:
