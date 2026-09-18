@@ -9,7 +9,7 @@ Mini Hackathon AI · Hướng **A — VLearn** · Lát cắt: mở nguồn ngoà
 | `README.md` | Có | File này |
 | `TEAMMATES.md` | Có | Họ tên + vai (MSSV điền đủ trong `TEAMMATES.md`) |
 | `spec.md` | Có | AI Spec 8 phần · quality bar khóa ≥ 93,3% (14/15) |
-| `demo-slides.pdf` | **Thiếu — nhóm bổ sung** | Đúng 6 trang PDF báo cáo |
+| `demo-slides.pdf` | Có | Đúng **6 trang** PDF báo cáo |
 | `codebase/` | Có | Prototype AI thật; fetch/retry = **MOCK** |
 | `eval/` | Có | Golden set **20** case + `eval/runs/run-01.*` |
 | `validation/` | Có | Nhật ký willing users (R6) |
