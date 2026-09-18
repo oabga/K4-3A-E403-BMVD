@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VLearn Extend · Chọn nguồn ngoài</title>
+  <style>
+    :root {
+      --ink:#1c1914; --muted:#5c564c; --line:#ddd6c8; --paper:#f6f1e7;
+      --card:#fffcf7; --accent:#2c4a3e; --link:#1a5f9e; --panel:#f3efe6;
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:"Segoe UI","Noto Sans",sans-serif; background:var(--paper); color:var(--ink); }
+    header {
+      padding:12px 20px; border-bottom:1px solid var(--line); background:var(--card);
+      display:flex; justify-content:space-between; gap:12px; align-items:center;
+    }
+    .meta { font-size:13px; color:var(--muted); }
+    .pill { font-size:11px; font-weight:700; padding:2px 8px; border-radius:999px; background:#e5f4ec; }
+    .pill.mock { background:#f8ecd8; }
+    .pill.bad { background:#f6e4e4; }
+    main {
+      display:grid;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      min-height:calc(100vh - 56px);
+    }
+    .sources {
+      border-right:1px solid var(--line);
+      background:var(--panel);
+      display:flex; flex-direction:column;
+      min-height:0;
+    }
+    .sources-head { padding:14px 16px 8px; border-bottom:1px solid var(--line); }
+    .sources-head h2 { margin:0 0 6px; font-size:15px; }
+    .query-box {
+      width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:10px;
+      background:#fff; font:inherit; color:var(--muted);
+    }
+    .src-toolbar {
+      padding:8px 16px; display:flex; align-items:center; gap:8px;
+      border-bottom:1px solid var(--line); font-size:13px;
+    }
+    .src-list { flex:1; overflow:auto; padding:8px 10px; display:flex; flex-direction:column; gap:8px; }
+    .src-item {
+      display:grid; grid-template-columns:1fr auto; gap:8px; align-items:start;
+      padding:10px 12px; background:var(--card); border:1px solid var(--line); border-radius:12px;
+    }
+    .src-item.empty { color:var(--muted); text-align:center; border-style:dashed; }
+    .src-site { font-size:11px; color:var(--muted); margin-bottom:2px; }
+    .src-title { font-size:13px; color:var(--link); font-weight:600; line-height:1.35; }
+    .src-snip { font-size:12px; color:var(--muted); margin-top:4px; line-height:1.4; }
+    .src-item input { margin-top:4px; width:16px; height:16px; }
+    .sources-foot {
+      padding:12px 16px; border-top:1px solid var(--line); background:var(--card);
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+    }
+    .sources-foot button {
+      background:#1a73e8; color:#fff; border:0; border-radius:999px;
+      padding:10px 22px; font:inherit; font-weight:600; cursor:pointer;
+    }
+    .sources-foot button:disabled { opacity:0.45; cursor:not-allowed; }
+    .chat { display:flex; flex-direction:column; gap:10px; padding:16px 20px; min-height:0; }
+    .hint { font-size:13px; color:var(--muted); }
+    .hint code { font-size:12px; background:#eee8dc; padding:1px 4px; border-radius:4px; }
+    .log { flex:1; min-height:280px; overflow:auto; display:flex; flex-direction:column; gap:8px; }
+    .msg { max-width:92%; padding:10px 12px; border-radius:12px; font-size:14px; line-height:1.45; white-space:pre-wrap; }
+    .user { align-self:flex-end; background:var(--accent); color:#fff; }
+    .bot { align-self:flex-start; background:var(--card); border:1px solid var(--line); }
+    .chips { display:flex; flex-wrap:wrap; gap:6px; }
+    .chips button {
+      background:var(--card); color:var(--ink); border:1px dashed var(--line);
+      padding:6px 10px; font-size:12px; border-radius:12px; cursor:pointer;
+    }
+    form.ask { display:flex; gap:8px; }
+    input, select, button { font:inherit; }
+    form.ask input { flex:1; padding:10px; border-radius:12px; border:1px solid var(--line); }
+    form.ask button, form.ask select {
+      background:var(--accent); color:#fff; border:0; border-radius:12px; padding:0 14px; cursor:pointer;
+    }
+    form.ask select { background:var(--card); color:var(--ink); border:1px solid var(--line); padding:0 10px; }
+    @media (max-width:900px){
+      main { grid-template-columns:1fr; }
+      .sources { border-right:0; border-bottom:1px solid var(--line); max-height:42vh; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <strong>VLearn Extend · CP4</strong>
+      <div class="meta">
+        Trả lời: <span class="pill" id="aiPill">AI ?</span>
+        · Fetch/retry: <span class="pill mock">MOCK</span>
+        · Ngoài lớp: <span class="pill mock">chọn nguồn rồi Nhập</span>
+        · Corpus: <code>D1-P*</code>
+      </div>
+    </div>
+    <div class="meta" id="health"></div>
+  </header>
+  <main>
+    <aside class="sources" id="sourcePanel">
+      <div class="sources-head">
+        <h2>Nguồn › Khám phá nguồn <span class="pill mock">MOCK</span></h2>
+        <input class="query-box" id="discoverQuery" readonly placeholder="Chưa có truy vấn — hỏi bên phải khi slide không đủ" />
+      </div>
+      <div class="src-toolbar">
+        <label><input type="checkbox" id="selectAll" disabled /> Chọn tất cả</label>
+        <span class="meta" id="candCount">0 ứng viên</span>
+      </div>
+      <div class="src-list" id="srcList">
+        <div class="src-item empty">Khi câu hỏi ngoài corpus lớp, danh sách nguồn MOCK hiện ở đây — chọn rồi bấm Nhập.</div>
+      </div>
+      <div class="sources-foot">
+        <span class="meta" id="pickedCount">Đã chọn 0 nguồn</span>
+        <button type="button" id="importBtn" disabled>Nhập</button>
+      </div>
+    </aside>
+    <section class="chat">
+      <p class="hint">
+        Day 1 — AI &amp; LLM Foundation.
+        Có trên slide → trả lời ngay.
+        Liên quan chủ đề nhưng slide thiếu (vd. lịch sử LLM, người tạo Transformer) → chọn nguồn MOCK rồi <strong>Nhập</strong>.
+        Lệch môn (toán, lịch sử chung…) → từ chối, không mở nguồn.
+      </p>
+      <div class="log" id="log"></div>
+      <div class="chips">
+        <button type="button" data-q="AI, Machine Learning, Deep Learning và Generative AI khác nhau như thế nào theo bài Day 1?" data-p="allow_mock">IN · AI/ML/DL</button>
+        <button type="button" data-q="Lịch sử LLM là gì? Ai là người tạo ra hướng mô hình này?" data-p="allow_mock">NEED · lịch sử LLM</button>
+        <button type="button" data-q="Slide có nói Self-Attention, nhưng cho em ví dụ đời thực ngoài slide để hiểu vì sao nó nhìn toàn bộ câu tốt hơn RNN." data-p="allow_mock">NEED · ví dụ ngoài slide</button>
+        <button type="button" data-q="Cho DOI paper Attention Is All You Need để em trích dẫn, nhưng môi trường đang cấm fetch web." data-p="deny">CANNOT · DOI</button>
+        <button type="button" data-q="công thức phương trình bậc 2 là gì?" data-p="allow_mock">SCOPE · lệch môn</button>
+      </div>
+      <form class="ask" id="f">
+        <select id="policy" title="fetch policy">
+          <option value="allow_mock">fetch MOCK bật</option>
+          <option value="deny">cấm fetch</option>
+          <option value="fail_after_retry">MOCK fail + retry</option>
+        </select>
+        <input id="q" placeholder="Câu hỏi…" />
+        <button type="submit">Gửi AI</button>
+      </form>
+    </section>
+  </main>
+  <script>
+    const log = document.getElementById("log");
+    const aiPill = document.getElementById("aiPill");
+    const srcList = document.getElementById("srcList");
+    const importBtn = document.getElementById("importBtn");
+    const selectAll = document.getElementById("selectAll");
+    const pickedCount = document.getElementById("pickedCount");
+    const candCount = document.getElementById("candCount");
+    const discoverQuery = document.getElementById("discoverQuery");
+
+    let pendingQuestion = null;
+    let pendingPolicy = "allow_mock";
+
+    fetch("/health").then(r => r.json()).then(h => {
+      aiPill.textContent = h.ai_that ? "AI THẬT" : "THIẾU KEY";
+      if (!h.ai_that) aiPill.className = "pill bad";
+      document.getElementById("health").textContent = h.ai_that
+        ? "Sẵn sàng live · chọn nguồn khi NEED_EXTERNAL"
+        : "Thêm OPENAI_API_KEY hoặc GEMINI_API_KEY vào .env";
+    });
+
+    function add(cls, text) {
+      const d = document.createElement("div");
+      d.className = "msg " + cls;
+      d.textContent = text;
+      log.appendChild(d);
+      log.scrollTop = log.scrollHeight;
+      return d;
+    }
+
+    function updatePicked() {
+      const n = srcList.querySelectorAll("input[type=checkbox][data-id]:checked").length;
+      pickedCount.textContent = "Đã chọn " + n + " nguồn";
+      importBtn.disabled = !pendingQuestion || n === 0;
+      const boxes = [...srcList.querySelectorAll("input[type=checkbox][data-id]")];
+      selectAll.disabled = boxes.length === 0;
+      if (boxes.length) selectAll.checked = boxes.every(b => b.checked);
+    }
+
+    function renderCandidates(question, candidates) {
+      pendingQuestion = question;
+      discoverQuery.value = question;
+      candCount.textContent = candidates.length + " ứng viên";
+      srcList.innerHTML = "";
+      if (!candidates.length) {
+        srcList.innerHTML = '<div class="src-item empty">Không có nguồn MOCK — thử đổi câu hỏi hoặc policy.</div>';
+        updatePicked();
+        return;
+      }
+      candidates.forEach((c, i) => {
+        const row = document.createElement("label");
+        row.className = "src-item";
+        row.innerHTML =
+          '<div>' +
+            '<div class="src-site">' + (c.site || "mock") + " · " + c.id + "</div>" +
+            '<div class="src-title">' + c.title + "</div>" +
+            '<div class="src-snip">' + c.snippet + "</div>" +
+          "</div>" +
+          '<input type="checkbox" data-id="' + c.id + '"' + (i < 2 ? " checked" : "") + " />";
+        srcList.appendChild(row);
+      });
+      srcList.querySelectorAll("input[type=checkbox]").forEach(cb => {
+        cb.addEventListener("change", updatePicked);
+      });
+      selectAll.disabled = false;
+      updatePicked();
+    }
+
+    function clearCandidates(msg) {
+      pendingQuestion = null;
+      discoverQuery.value = "";
+      candCount.textContent = "0 ứng viên";
+      srcList.innerHTML = '<div class="src-item empty">' + (msg || "Chưa có truy vấn — hỏi bên phải khi slide không đủ.") + "</div>";
+      selectAll.checked = false;
+      selectAll.disabled = true;
+      updatePicked();
+    }
+
+    function formatAnswer(j) {
+      return (
+        "[" + j.label + "]  AI=" + j.ai + "  " + (j.model || "") + "\n" +
+        (j.mock_parts || []).join(" · ") +
+        (j.fetch_detail ? "\n" + j.fetch_detail : "") + "\n\n" +
+        (j.answer || "") +
+        (j.ask_again ? "\n\nHỏi lại: " + j.ask_again : "") +
+        (j.search_brief ? "\nBrief: " + j.search_brief.join(" · ") : "") +
+        (j.notebook_ids && j.notebook_ids.length ? "\nNguồn notebook: " + j.notebook_ids.join(", ") : "")
+      );
+    }
+
+    async function ask(q, policy, selectedIds) {
+      add("user", selectedIds ? ("Nhập " + selectedIds.length + " nguồn cho: " + q) : q);
+      const pending = add("bot", selectedIds ? "Đang tổng hợp từ nguồn đã chọn…" : "Đang kiểm tra corpus / tìm nguồn…");
+      try {
+        const body = { question: q, fetch_policy: policy };
+        if (selectedIds) body.selected_ids = selectedIds;
+        const r = await fetch("/ask", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+        const j = await r.json();
+        pending.remove();
+        if (j.technical_error) {
+          add("bot", "Lỗi kỹ thuật: " + j.technical_error);
+          return;
+        }
+        if (j.need_selection) {
+          pendingPolicy = policy;
+          renderCandidates(q, j.candidates || []);
+          add(
+            "bot",
+            "[NEED_EXTERNAL] Corpus lớp chưa đủ.\n" +
+            "Đã tìm " + (j.candidates || []).length + " nguồn MOCK (bên trái).\n" +
+            "Chọn nguồn → bấm Nhập → AI mới trả lời.\n" +
+            (j.fetch_detail || "")
+          );
+          return;
+        }
+        if (selectedIds) clearCandidates("Đã nhập nguồn. Hỏi tiếp bên phải nếu cần.");
+        add("bot", formatAnswer(j));
+      } catch (e) {
+        pending.textContent = "Lỗi kỹ thuật: " + e;
+      }
+    }
+
+    selectAll.addEventListener("change", () => {
+      srcList.querySelectorAll("input[type=checkbox][data-id]").forEach(cb => {
+        cb.checked = selectAll.checked;
+      });
+      updatePicked();
+    });
+
+    importBtn.addEventListener("click", () => {
+      if (!pendingQuestion) return;
+      const ids = [...srcList.querySelectorAll("input[type=checkbox][data-id]:checked")].map(cb => cb.dataset.id);
+      if (!ids.length) return;
+      ask(pendingQuestion, pendingPolicy, ids);
+    });
+
+    document.getElementById("f").addEventListener("submit", e => {
+      e.preventDefault();
+      const q = document.getElementById("q").value.trim();
+      if (!q) return;
+      ask(q, document.getElementById("policy").value);
+      document.getElementById("q").value = "";
+    });
+    document.querySelectorAll(".chips button").forEach(b => {
+      b.addEventListener("click", () => {
+        document.getElementById("policy").value = b.dataset.p;
+        ask(b.dataset.q, b.dataset.p);
+      });
+    });
+    updatePicked();
+  </script>
+</body>
+</html>

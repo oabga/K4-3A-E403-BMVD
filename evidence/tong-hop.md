@@ -23,9 +23,9 @@ Nguồn chi tiết: `evidence/mining.md`, `evidence/quotes.md`.
 
 ## 2. Khảo sát form (chuẩn B) — chưa khóa số trong repo
 
-- Draft câu hỏi + link: `evidence/khao-sat.md`
-- **Repo chưa có** export phản hồi (CSV/sheet/ảnh) → **không** đưa `n = 24`, 83,3%, 70,8%, quote form #04/#11 vào spec như số đã đo.
-- Nếu sau này có sheet: bổ sung vào đây + `quotes.md`, rồi mới cập nhật §1 spec (changelog §9).
+- Draft câu hỏi + meta gửi: `evidence/khao-sat.md`
+- **Repo chưa có** export phản hồi gốc (CSV/sheet) để audit độc lập → **không** khóa `n`/% form trong `spec.md`.
+- Spec §1–§2 dựa **chuẩn A mining**. Khi có sheet: cập nhật đây + changelog §9.
 
 ---
 

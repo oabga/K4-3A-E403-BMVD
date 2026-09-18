@@ -3,7 +3,7 @@
 Cùng cấu hình cả bộ: `eval/prompt.md` + một model + fetch **MOCK**.
 CP3 chốt tiêu chí đạt từng case và lấy số đo gốc trên **GS-01…GS-15**. **CP4** khóa ngưỡng % trong `spec.md` từ run-01 (14/15 = 93,3%). GS-16…GS-20 bổ sung để đủ ≥20, neo excerpt Day 1 chưa phủ (`D1-P04`, `D1-P05`, `D1-P08`).
 
-Corpus: **Day 1 - AI & LLM Foundation**, excerpt `D1-P01` đến `D1-P10` trong `prototype/corpus_excerpts.json`.
+Corpus: **Day 1 - AI & LLM Foundation**, excerpt `D1-P01` đến `D1-P10` trong `codebase/corpus_excerpts.json`.
 
 ## Cơ cấu 20 case
 

@@ -1,0 +1,71 @@
+{
+  "note": "MOCK — không phải web thật, không DOI. Chỉ nguồn mở rộng chủ đề Day 1 (AI/LLM). User chọn rồi Nhập.",
+  "sources": [
+    {
+      "id": "MOCK-EXT-01",
+      "site": "fpt.ai",
+      "title": "[MOCK] Ví dụ đời thực Self-Attention vs RNN",
+      "text": "Ví dụ MOCK ngoài lớp: đọc câu 'Con mèo mà tôi nuôi hôm qua đã chạy mất' — Self-Attention cho phép từ 'chạy' nhìn lại 'Con mèo' dù ở xa; RNN tuần tự dễ quên chủ ngữ khi câu dài. Đây là nguồn ngoài slide Day 1, chỉ để minh họa."
+    },
+    {
+      "id": "MOCK-EXT-02",
+      "site": "docs.enterprise.mock",
+      "title": "[MOCK] Context Rot trong chatbot doanh nghiệp",
+      "text": "Nguồn MOCK ngoài lớp: ngoài cắt ngắn context, đội triển khai thường dùng retrieval chọn đoạn liên quan (RAG), tóm tắt hội thoại cũ, và giới hạn tool-output. Không nhồi toàn bộ FAQ vào một cửa sổ. Đây không phải DOI/paper thật."
+    },
+    {
+      "id": "MOCK-EXT-03",
+      "site": "openai.com/docs",
+      "title": "[MOCK] Tokenizer GPT-4 vs số liệu slide tiếng Việt",
+      "text": "Nguồn MOCK ngoài lớp: tokenizer kiểu GPT-4 (BPE) có bảng merge riêng; số token tiếng Việt trên slide Day 1 (khoảng 1.3–1.5× tiếng Anh) là số liệu lớp. So sánh chi tiết bảng merge GPT-4 không có trong slide — chỉ có trong nguồn MOCK này."
+    },
+    {
+      "id": "MOCK-EXT-04",
+      "site": "mit.edu/ocw",
+      "title": "[MOCK] Giáo trình nhập môn — LLM dự đoán token tiếp theo",
+      "text": "Nguồn MOCK ngoài lớp: LLM là mô hình xác suất next-token; không 'hiểu' như người. Ví dụ ngoài slide giúp phân biệt với Symbolic AI. Không phải paper DOI."
+    },
+    {
+      "id": "MOCK-EXT-05",
+      "site": "huggingface.co/blog",
+      "title": "[MOCK] Giảm hallucination khi làm chatbot production",
+      "text": "Nguồn MOCK ngoài lớp: ngoài định nghĩa hallucination trên slide, đội sản xuất dùng grounding/RAG, citation bắt buộc, và từ chối khi không có nguồn. Đây là quy trình ngoài bài Day 1."
+    },
+    {
+      "id": "MOCK-EXT-06",
+      "site": "arxiv.org/abs/mock",
+      "title": "[MOCK] Attention Is All You Need — nhóm tác giả & bối cảnh",
+      "text": "Nguồn MOCK ngoài lớp: kiến trúc Transformer được Google công bố 2017 trong bài 'Attention Is All You Need' (Vaswani et al.). Slide đã nêu paper; phần tiểu sử/đóng góp tác giả là mở rộng ngoài quiz. Không bịa DOI số."
+    },
+    {
+      "id": "MOCK-EXT-07",
+      "site": "wikipedia.org",
+      "title": "[MOCK] Fei-Fei Li & ImageNet — mở rộng ngoài slide",
+      "text": "Nguồn MOCK ngoài lớp: ImageNet gắn với Fei-Fei Li; slide đã nói vai trò ImageNet+GPU năm 2012. Phần tiểu sử ngắn và hướng nghiên cứu thị giác máy tính là mở rộng ngoài bài."
+    },
+    {
+      "id": "MOCK-EXT-08",
+      "site": "deepmind.google",
+      "title": "[MOCK] AlphaGo / DeepMind — bối cảnh ngoài bài",
+      "text": "Nguồn MOCK ngoài lớp: AlphaGo của DeepMind thắng Lee Sedol; nước 37 nổi tiếng. Slide đã nêu; phần tổ chức DeepMind / self-play là mở rộng ngoài quiz Day 1."
+    },
+    {
+      "id": "MOCK-EXT-09",
+      "site": "history.llm.mock",
+      "title": "[MOCK] Lược sử LLM — từ mô hình ngôn ngữ đến GPT",
+      "text": "Nguồn MOCK ngoài lớp: slide nói LLM = next-token prediction. Mở rộng: dòng mô hình ngôn ngữ thống kê → neural LM → Transformer-LM → họ GPT. Không có trong slide chi tiết timeline; ghi rõ ngoài bài."
+    },
+    {
+      "id": "MOCK-EXT-10",
+      "site": "history.transformer.mock",
+      "title": "[MOCK] Ai công bố Transformer? — Vaswani et al. 2017",
+      "text": "Nguồn MOCK ngoài lớp: nhóm Google (Vaswani và cộng sự) công bố Transformer 2017. Slide có tên paper; chi tiết 'ai tạo ra đầu tiên' lấy từ nguồn ngoài MOCK này, không DOI giả."
+    },
+    {
+      "id": "MOCK-EXT-11",
+      "site": "history.turing.mock",
+      "title": "[MOCK] Alan Turing — người đề xuất Turing Test",
+      "text": "Nguồn MOCK ngoài lớp: slide có Turing Test (1950). Mở rộng tiểu sử ngắn: Alan Turing, bài báo Computing Machinery and Intelligence; không đi sang lịch sử chính trị/quân sự ngoài ngữ cảnh AI."
+    }
+  ]
+}

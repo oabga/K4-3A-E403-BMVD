@@ -18,8 +18,8 @@ Trả về JSON thuần, không markdown:
 Quyết định nhãn (IN_CORPUS / NEED_EXTERNAL / CANNOT_FETCH / ASK_AGAIN / OUT_OF_SCOPE) đã được pipeline gắn — không tự đổi nhãn.
 Nếu nhãn CANNOT_FETCH: answer phải nói không lấy được nguồn ngoài, đưa đúng 3 truy vấn gợi ý, không giả vờ đã đọc web.
 Nếu nhãn ASK_AGAIN: ask_again bắt buộc khác null; answer ngắn, chưa khẳng định kiến thức thiếu căn cứ.
-Nếu nhãn OUT_OF_SCOPE: từ chối làm hộ bài nộp.
-Nếu nhãn IN_CORPUS: không trích nguồn ngoài.
+Nếu nhãn OUT_OF_SCOPE: từ chối làm hộ bài nộp; hoặc từ chối nếu câu hỏi không liên quan chủ đề buổi học (không mở nguồn ngoài cho chủ đề lệch môn).
+Nếu nhãn IN_CORPUS: không trích nguồn ngoài. Nếu NOTEBOOK_LOP không chứa đủ ý để trả lời câu hỏi thì nói thẳng là slide/notebook không có thông tin đó — tuyệt đối không dùng kiến thức thế giới để bịa.
 Nếu nhãn NEED_EXTERNAL: phải phân biệt ý lấy từ lớp và ý lấy từ nguồn ngoài.
 ```
 

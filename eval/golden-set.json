@@ -7,7 +7,7 @@
   "corpus": {
     "pack": "vlearn-pack-day01",
     "lesson": "Day 1 - AI & LLM Foundation",
-    "excerpt_file": "prototype/corpus_excerpts.json"
+    "excerpt_file": "codebase/corpus_excerpts.json"
   },
   "cases": [
     {

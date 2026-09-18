@@ -9,7 +9,7 @@ Luồng mỗi lần bấm Gửi:
 
 Chạy:
   source .venv/bin/activate
-  streamlit run prototype/streamlit_app.py
+  streamlit run codebase/streamlit_app.py
 """
 from __future__ import annotations
 
@@ -216,5 +216,5 @@ with col_right:
 st.divider()
 st.markdown(
     "**Video 30s:** gợi ý IN → NEED → CANNOT → SCOPE · rồi mở `eval/runs/run-01.md`. "
-    "Eval cả bộ: `python prototype/run_eval.py`"
+    "Eval cả bộ: `python codebase/run_eval.py`"
 )
