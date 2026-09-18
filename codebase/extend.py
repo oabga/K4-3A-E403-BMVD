@@ -81,7 +81,13 @@ RELATED_PEOPLE_RE = (
 
 def content_tokens(text: str) -> set[str]:
     raw = set(re.findall(r"[a-z0-9]+", fold(text)))
-    return {t for t in raw if len(t) >= 3 and t not in STOPWORDS}
+    keep = set()
+    for t in raw:
+        if t in DOMAIN_TERMS:
+            keep.add(t)
+        elif len(t) >= 3 and t not in STOPWORDS:
+            keep.add(t)
+    return keep
 
 
 def is_homework(question: str) -> bool:
@@ -107,6 +113,48 @@ def topic_related(question: str) -> bool:
     return False
 
 
+def asks_beyond_slide(question: str) -> bool:
+    """Xin mở rộng ngoài nội dung đã có trên slide (vẫn neo chủ đề)."""
+    q = fold(question)
+    return bool(
+        re.search(
+            r"ngoai slide|vi du doi thuc|trong thuc te|ngoai viec|"
+            r"chatbot doanh nghiep|tokenizer cua gpt|gpt-4|"
+            r"doc them tren mang|tim docs chinh thuc|"
+            r"lich su|nguoi tao|phat minh|dau tien|tieu su|ra doi|"
+            r"mo rong|dao sau hon|chi tiet hon ve nguoi",
+            q,
+        )
+    )
+
+
+def corpus_sufficient(question: str, hits: list[dict]) -> bool:
+    """
+    Corpus đủ khi đoạn lớp phủ được ý hỏi.
+    Câu ngắn kiểu "LLM là gì?" / "Turing Test là gì?" chỉ có 1–2 token nội dung
+    → không đòi score >= 3 (tránh gán nhầm NEED_EXTERNAL).
+    """
+    if not hits:
+        return False
+    q_tokens = content_tokens(question)
+    if not q_tokens:
+        return False
+    top = hits[0]
+    blob_tokens = content_tokens(top.get("title", "") + " " + top.get("text", ""))
+    covered = q_tokens & blob_tokens
+    # Câu ngắn: mọi token nội dung đều nằm trong đoạn hit → đủ slide
+    if covered == q_tokens:
+        return True
+    # Câu dài hơn: cần overlap mạnh
+    if top.get("score", 0) >= 3 and len(covered) >= 2:
+        return True
+    # Một khái niệm miền khớp rõ title (vd. LLM, Turing, Transformer…)
+    title_tokens = content_tokens(top.get("title", ""))
+    if (q_tokens & DOMAIN_TERMS & title_tokens) and len(covered) >= 1:
+        return True
+    return False
+
+
 def retrieve(question: str, excerpts: list[dict], corpus_refs: list[str] | None = None) -> list[dict]:
     if corpus_refs:
         by_id = {ex["id"]: ex for ex in excerpts}
@@ -120,11 +168,15 @@ def retrieve(question: str, excerpts: list[dict], corpus_refs: list[str] | None 
     q_tokens = content_tokens(question)
     hits = []
     for ex in excerpts:
-        blob = fold(ex["text"] + " " + ex["title"] + " " + ex["id"])
-        t = content_tokens(blob)
-        score = len(q_tokens & t)
-        if score:
-            hits.append({**ex, "score": score})
+        title_t = content_tokens(ex["title"] + " " + ex["id"])
+        body_t = content_tokens(ex["text"])
+        blob_t = title_t | body_t
+        overlap = q_tokens & blob_t
+        if not overlap:
+            continue
+        # Title match nặng hơn — "Turing Test" / "LLM" trong tiêu đề slide
+        score = len(overlap) + 2 * len(q_tokens & title_t)
+        hits.append({**ex, "score": score})
     hits.sort(key=lambda x: -x["score"])
     return hits[:3]
 
@@ -155,18 +207,12 @@ def decide(question: str, hits: list[dict], fetch_policy: str) -> str:
     if fetch_policy == "fail_after_retry":
         return "CANNOT_FETCH"
 
-    # Hỏi rộng/sâu hơn slide nhưng vẫn neo chủ đề → NEED_EXTERNAL
-    if re.search(
-        r"ngoai slide|vi du doi thuc|trong thuc te|ngoai viec|"
-        r"chatbot doanh nghiep|tokenizer cua gpt|gpt-4|"
-        r"doc them tren mang|tim docs chinh thuc|"
-        r"lich su|nguoi tao|phat minh|dau tien|tieu su|ra doi",
-        q,
-    ):
+    # Xin mở rộng ngoài slide → NEED_EXTERNAL (dù corpus có khái niệm nền)
+    if asks_beyond_slide(question):
         return "NEED_EXTERNAL"
 
-    top = hits[0]["score"] if hits else 0
-    if top >= 3:
+    # Định nghĩa / hỏi đúng nội dung đã có trên slide → IN_CORPUS
+    if corpus_sufficient(question, hits):
         return "IN_CORPUS"
     return "NEED_EXTERNAL"
 
