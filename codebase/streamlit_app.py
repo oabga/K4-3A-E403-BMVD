@@ -165,10 +165,12 @@ with col_src:
     if pending_q:
         st.text_input("Truy vấn", value=pending_q, disabled=True, key="discover_q")
         st.caption(f"{len(candidates)} ứng viên MOCK")
-        default_ids = [c["id"] for c in candidates[:2]]
-        options = {f"{c['id']} · {c.get('site', 'mock')} — {c['title']}": c["id"] for c in candidates}
+        default_ids = [candidates[0]["id"]] if candidates else []
+        options = {
+            f"{c['id']} · {c.get('site', 'mock')} — {c['title']}": c["id"] for c in candidates
+        }
         picked_labels = st.multiselect(
-            "Chọn nguồn",
+            "Chọn nguồn (ưu tiên nguồn xếp hạng cao nhất)",
             list(options.keys()),
             default=[k for k, v in options.items() if v in default_ids],
             key="picked_labels",

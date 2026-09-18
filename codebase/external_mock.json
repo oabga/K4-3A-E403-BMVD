@@ -64,8 +64,8 @@
     {
       "id": "MOCK-EXT-11",
       "site": "history.turing.mock",
-      "title": "[MOCK] Alan Turing — người đề xuất Turing Test",
-      "text": "Nguồn MOCK ngoài lớp: slide có Turing Test (1950). Mở rộng tiểu sử ngắn: Alan Turing, bài báo Computing Machinery and Intelligence; không đi sang lịch sử chính trị/quân sự ngoài ngữ cảnh AI."
+      "title": "[MOCK] Lịch sử / tiểu sử Alan Turing (ngoài slide)",
+      "text": "Nguồn MOCK ngoài lớp dành riêng cho hỏi mở rộng về Alan Turing: ông đề xuất Turing Test năm 1950; bài báo Computing Machinery and Intelligence. Slide Day 1 chỉ nói Turing Test — phần tiểu sử/lịch sử nhân vật lấy từ nguồn MOCK này, không phải Self-Attention hay AlphaGo."
     }
   ]
 }

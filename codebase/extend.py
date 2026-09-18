@@ -155,6 +155,59 @@ def corpus_sufficient(question: str, hits: list[dict]) -> bool:
     return False
 
 
+def rank_mock_sources(question: str, sources: list[dict]) -> list[dict]:
+    """Xếp ứng viên MOCK theo câu hỏi — ưu tiên đúng chủ đề, tránh nguồn lạc đề."""
+    q = fold(question)
+    q_tokens = content_tokens(question)
+    weak = {"lich", "su", "nguoi", "tao", "dau", "tien", "them", "doc", "cho", "minh"}
+    strong_q = q_tokens - weak
+
+    scored = []
+    for s in sources:
+        blob = fold(s.get("title", "") + " " + s.get("text", "") + " " + s.get("id", ""))
+        blob_t = content_tokens(blob)
+        score = 3 * len(strong_q & blob_t) + len(q_tokens & blob_t)
+
+        # Neo đúng nguồn theo chủ đề hỏi (điểm cao)
+        topic_rules = (
+            (r"turing|alan", "MOCK-EXT-11", 25),
+            (r"lich su (cua )?(llm|gpt)|llm ra doi|nguoi tao.*llm|ai tao.*llm", "MOCK-EXT-09", 22),
+            (r"vaswani|nguoi tao.*transformer|phat minh.*transformer|cong bo.*transformer", "MOCK-EXT-10", 22),
+            (r"fei-?fei|imagenet", "MOCK-EXT-07", 18),
+            (r"alphago|lee sedol|deepmind|nuoc (di )?37", "MOCK-EXT-08", 18),
+            (r"context rot|chatbot doanh nghiep", "MOCK-EXT-02", 16),
+            (r"tokenizer|gpt-4|token tieng viet", "MOCK-EXT-03", 16),
+            (r"vi du doi thuc|self-attention.*rnn|rnn.*self-attention", "MOCK-EXT-01", 16),
+            (r"hallucin|ao giac|production", "MOCK-EXT-05", 14),
+            (r"next.?token|ban chat llm", "MOCK-EXT-04", 12),
+            (r"attention is all|transformer paper", "MOCK-EXT-06", 12),
+        )
+        for pat, sid, boost in topic_rules:
+            if re.search(pat, q) and s["id"] == sid:
+                score += boost
+
+        # Đang hỏi Turing mà nguồn không nhắc Turing → hạ mạnh (tránh Self-Attention / hallucination)
+        if re.search(r"turing|alan", q) and not re.search(r"turing|alan", blob):
+            score -= 12
+        if re.search(r"\bllm\b", q) and re.search(r"lich su|nguoi tao|ra doi", q):
+            if s["id"] not in ("MOCK-EXT-09", "MOCK-EXT-04", "MOCK-EXT-11") and not re.search(
+                r"\bllm\b|gpt|ngon ngu", blob
+            ):
+                score -= 8
+
+        scored.append({**s, "score": score})
+
+    scored.sort(key=lambda x: (-x["score"], x["id"]))
+    if not scored:
+        return []
+    best = scored[0]["score"]
+    # Chỉ giữ nguồn thực sự liên quan (không đổ cả 11 cái lạc đề)
+    if best >= 10:
+        kept = [s for s in scored if s["score"] >= max(4, best * 0.35)]
+        return kept[:5]
+    return [s for s in scored if s["score"] > 0][:5]
+
+
 def retrieve(question: str, excerpts: list[dict], corpus_refs: list[str] | None = None) -> list[dict]:
     if corpus_refs:
         by_id = {ex["id"]: ex for ex in excerpts}
@@ -166,16 +219,21 @@ def retrieve(question: str, excerpts: list[dict], corpus_refs: list[str] | None 
             return hits[:3]
 
     q_tokens = content_tokens(question)
+    weak = {"lich", "su", "nguoi", "tao", "dau", "tien", "them", "doc", "cho", "minh"}
+    strong_q = q_tokens - weak
     hits = []
     for ex in excerpts:
         title_t = content_tokens(ex["title"] + " " + ex["id"])
         body_t = content_tokens(ex["text"])
         blob_t = title_t | body_t
         overlap = q_tokens & blob_t
+        strong_overlap = strong_q & blob_t
         if not overlap:
             continue
-        # Title match nặng hơn — "Turing Test" / "LLM" trong tiêu đề slide
-        score = len(overlap) + 2 * len(q_tokens & title_t)
+        # Bỏ hit chỉ vì chữ yếu kiểu "lịch sử" (dễ kéo nhầm AlphaGo)
+        if not strong_overlap and not (q_tokens & DOMAIN_TERMS & blob_t):
+            continue
+        score = len(strong_overlap) * 3 + len(overlap) + 2 * len(q_tokens & title_t)
         hits.append({**ex, "score": score})
     hits.sort(key=lambda x: -x["score"])
     return hits[:3]
@@ -215,34 +273,6 @@ def decide(question: str, hits: list[dict], fetch_policy: str) -> str:
     if corpus_sufficient(question, hits):
         return "IN_CORPUS"
     return "NEED_EXTERNAL"
-
-
-def rank_mock_sources(question: str, sources: list[dict]) -> list[dict]:
-    """Xếp ứng viên MOCK theo câu hỏi — UI hiện list để HV chọn (kiểu NotebookLM)."""
-    q = fold(question)
-    scored = []
-    for s in sources:
-        blob = fold(s.get("title", "") + " " + s.get("text", "") + " " + s.get("id", ""))
-        score = 0
-        for key, sid, boost in (
-            (r"context rot|doanh nghiep|chatbot|rag", "MOCK-EXT-02", 5),
-            (r"token|tokenizer|gpt", "MOCK-EXT-03", 5),
-            (r"attention|rnn|vi du|self-attention", "MOCK-EXT-01", 5),
-            (r"hallucin|ao giac|production", "MOCK-EXT-05", 5),
-            (r"llm|next.?token|du doan", "MOCK-EXT-04", 4),
-            (r"attention is all|transformer paper|vaswani", "MOCK-EXT-06", 4),
-            (r"imagenet|deep learning 2012|fei-?fei", "MOCK-EXT-07", 4),
-            (r"alphago|nuoc (di )?37|lee sedol|deepmind", "MOCK-EXT-08", 4),
-            (r"lich su (cua )?(llm|ai|gpt)|llm ra doi|nguoi tao.*llm|ai tao.*llm", "MOCK-EXT-09", 8),
-            (r"nguoi tao.*transformer|vaswani|phat minh.*transformer|attention is all", "MOCK-EXT-10", 8),
-            (r"turing|tieu su.*turing|lich su.*turing", "MOCK-EXT-11", 8),
-        ):
-            if re.search(key, q) and (sid in s["id"] or re.search(key, blob)):
-                score += boost
-        score += len(content_tokens(question) & content_tokens(blob))
-        scored.append({**s, "score": score})
-    scored.sort(key=lambda x: (-x["score"], x["id"]))
-    return scored
 
 
 def mock_fetch(
